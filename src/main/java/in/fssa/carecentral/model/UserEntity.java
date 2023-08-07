@@ -1,12 +1,10 @@
 package in.fssa.carecentral.model;
-
-enum Gender{M , F , O};
-
+import in.fssa.carecentral.enumFiles.*;
 public abstract class UserEntity implements Comparable<UserEntity>{
-	private Integer id;
+	private int id;
 	private String firstName;
 	private String lastName;
-	private Integer age;
+	private int age;
 	private Gender gender;
 	private long mobileNumber;
 	private String emailId;
@@ -49,8 +47,8 @@ public abstract class UserEntity implements Comparable<UserEntity>{
 		return gender;
 	}
 	
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public void setGender(Gender gender2) {
+		this.gender = gender2;
 	}
 
 	public long getMobileNumber() {
