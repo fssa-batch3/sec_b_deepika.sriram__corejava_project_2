@@ -1,5 +1,5 @@
 package in.fssa.carecentral.model;
 
-public class User {
+public class User extends UserEntity {
 
 }
