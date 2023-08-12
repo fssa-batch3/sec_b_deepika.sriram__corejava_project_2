@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,12 +15,11 @@ import in.fssa.carecentral.util.ConnectionUtil;
 
 public class UserDAO implements UserInterface {
 
-
 	public Set<User> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<User> userList =null;
+		Set<User> userList = null;
 		try {
 			con = ConnectionUtil.getConnection();
 			String query = "SELECT * FROM users WHERE is_active = 1";
@@ -28,7 +28,7 @@ public class UserDAO implements UserInterface {
 			userList = new HashSet<User>();
 			while (rs.next()) {
 				User user = new User();
-				user.setUserId(rs.getInt("user_id"));
+				user.setId(rs.getInt("user_id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
 				user.setAge(rs.getInt("age"));
@@ -36,28 +36,33 @@ public class UserDAO implements UserInterface {
 				user.setMobileNumber(rs.getLong("mobile_number"));
 				user.setEmailId(rs.getString("email_id"));
 				user.setActive(rs.getBoolean("is_active"));
-				
+
 				userList.add(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
-		}finally {
-			ConnectionUtil.close(con, ps);
+		} finally {
+			ConnectionUtil.close(con, ps, rs);
 		}
-		
+
 		return userList;
 	}
 
+	
+	
 	@Override
-	public void create(User newUser) throws RuntimeException {
+	public int create(User newUser) throws RuntimeException {
 		Connection con = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int generatedId = 0;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO users (first_name , last_name , age , gender , mobile_number , email_id , password) VALUES(? , ? , ? , ? , ? , ? , ?)";
-			ps = con.prepareStatement(query);
+			String query = "INSERT INTO users (first_name , last_name , age , gender , mobile_number , email_id , password) "
+					+ "VALUES(? , ? , ? , ? , ? , ? , ?)";
+			ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, newUser.getFirstName());
 			ps.setString(2, newUser.getLastName());
 			ps.setInt(3, newUser.getAge());
@@ -67,11 +72,20 @@ public class UserDAO implements UserInterface {
 			ps.setString(7, newUser.getPassword());
 
 			int rowsAffected = ps.executeUpdate();
+
 			if (rowsAffected > 0) {
+				rs = ps.getGeneratedKeys();
+				if(rs.next()) {
+					 generatedId = rs.getInt(1);
+				}
 				System.out.println("User had been created successfully");
 			} else {
 				throw new RuntimeException("User had not been created successfully");
 			}
+
+			
+			newUser.setId(generatedId);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -79,24 +93,36 @@ public class UserDAO implements UserInterface {
 		} finally {
 			ConnectionUtil.close(con, ps);
 		}
+		return newUser.getId();
 	}
 
 	@Override
-	public void update(int id, User newT) {
+	public void update(int id, User newUser) {
 		Connection con = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int userId=0;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE users SET first_name = ? WHERE is_active = 1 AND user_id = ?";
+			String query = "UPDATE users SET first_name = ? , last_name = ? , age = ? , gender = ? , mobile_number = ? , password = ? WHERE is_active = 1 AND user_id = ?";
 			ps = con.prepareStatement(query);
-			ps.setString(1, "Vaishnavi");
-			ps.setInt(2, id);
-			int rowsAffected = ps.executeUpdate();
-			if (rowsAffected > 0) {
+			ps.setString(1, newUser.getFirstName());
+			ps.setString(2, newUser.getLastName());
+			ps.setInt(3, newUser.getAge());
+			ps.setString(4, newUser.getGender().name());
+			ps.setLong(5, newUser.getMobileNumber());
+			ps.setString(6, newUser.getPassword());
+			ps.setInt(7, id);
+			int rowsaffected = ps.executeUpdate();
+			if (rowsaffected>0) {
+				
 				System.out.println("User had been updated successfully");
 			} else {
 				throw new RuntimeException("User had not been updated successfully");
 			}
+			
+			
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,7 +146,7 @@ public class UserDAO implements UserInterface {
 			if (rowsAffected > 0) {
 				System.out.println("User had been deleted successfully");
 			} else {
-				throw new RuntimeException("User had not been deleted successfully");
+				throw new RuntimeException("User does not exist");
 			}
 
 		} catch (SQLException e) {
@@ -144,9 +170,9 @@ public class UserDAO implements UserInterface {
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				user = new User();
-				user.setUserId(rs.getInt("user_id"));
+				user.setId(rs.getInt("user_id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
 				user.setAge(rs.getInt("age"));
@@ -156,14 +182,13 @@ public class UserDAO implements UserInterface {
 				user.setPassword(rs.getString("password"));
 				user.setActive(rs.getBoolean("is_active"));
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		} finally {
-			ConnectionUtil.close(con, ps);
+			ConnectionUtil.close(con, ps, rs);
 		}
 
 		return user;
@@ -181,9 +206,9 @@ public class UserDAO implements UserInterface {
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				user = new User();
-				user.setUserId(rs.getInt("user_id"));
+				user.setId(rs.getInt("user_id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
 				user.setAge(rs.getInt("age"));
@@ -193,14 +218,14 @@ public class UserDAO implements UserInterface {
 				user.setPassword(rs.getString("password"));
 				user.setActive(rs.getBoolean("is_active"));
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
+			if (e.getMessage().contains("Duplicate entry")) {
+				throw new RuntimeException("User already exists");
+			}
 		} finally {
-			ConnectionUtil.close(con, ps);
+			ConnectionUtil.close(con, ps, rs);
 		}
 
 		return user;
@@ -217,15 +242,15 @@ public class UserDAO implements UserInterface {
 			String query = "SELECT COUNT(*) FROM users WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				count = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
-		}finally {
-			ConnectionUtil.close(con, ps);
+		} finally {
+			ConnectionUtil.close(con, ps, rs);
 		}
 		return count;
 	}

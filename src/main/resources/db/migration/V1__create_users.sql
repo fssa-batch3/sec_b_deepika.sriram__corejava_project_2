@@ -52,7 +52,7 @@ created_at timestamp default current_timestamp,
 modified_at timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 
-alter table doctors drop column is_active;
+
 
 -- creating doctor -- 
 insert into doctors(user_id , qualifications , experience , department)

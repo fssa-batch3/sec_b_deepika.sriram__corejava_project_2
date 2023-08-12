@@ -1,6 +1,8 @@
-package in.fssa.carecentral.model;
-import in.fssa.carecentral.enumFiles.*;
-public abstract class UserEntity implements Comparable<UserEntity>{
+package in.fssa.carecentral.dto;
+
+import in.fssa.carecentral.enumFiles.Gender;
+
+public class DoctorDTO {
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -10,6 +12,11 @@ public abstract class UserEntity implements Comparable<UserEntity>{
 	private String emailId;
 	private String password;
 	private boolean isActive = true;
+	private String qualifications;
+	private double experience;
+	private String department;
+	private boolean isDocActive = true;
+	private int userId;
 	
 	public Integer getId() {
 		return id;
@@ -82,34 +89,51 @@ public abstract class UserEntity implements Comparable<UserEntity>{
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	
+	public String getQualifications() {
+		return qualifications;
+	}
+	public void setQualifications(String qualifications) {
+		this.qualifications = qualifications;
+	}
+	public double getExperience() {
+		return experience;
+	}
+	public void setExperience(double experience) {
+		this.experience = experience;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public boolean isDocActive() {
+		return isDocActive;
+	}
+	public void setDocActive(boolean isActive) {
+		this.isDocActive = isActive;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	
 	
 	public String fullName() {
 		return firstName.concat(" ").concat(lastName);
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
-		return "UserEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+		return "DoctorDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
 				+ ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", emailId=" + emailId + ", password="
-				+ password + ", isActive=" + isActive + "]\n";
-	}
-
-	
-	@Override
-	public int compareTo(UserEntity o) {
-
-		if (this.getId() == o.getId()) {
-			return 0;
-		} else {
-			if (this.getId() > o.getId()) {
-				return 1;
-			} else {
-				return -1;
-			}
-		}
+				+ password + ", isActive=" + isActive + ", qualifications=" + qualifications + ", experience="
+				+ experience + ", department=" + department + ", isDocActive=" + isDocActive + ", userId=" + userId
+				+ "]\n";
 	}
 }

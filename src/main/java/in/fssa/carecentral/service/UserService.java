@@ -6,16 +6,18 @@ import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.validator.UserValidator;
 import in.fssa.carecentral.dao.*;
+import in.fssa.carecentral.dto.DoctorDTO;
 
 
 
 public class UserService {
-public void create(User newUser) throws ValidationException{
+	public int create(User newUser) throws ValidationException{
 		
-		UserValidator.validate(newUser);
+		UserValidator.validateForCreate(newUser);
 		
 		UserDAO userObj = new UserDAO();
-		userObj.create(newUser);
+		int user_id = userObj.create(newUser);
+		return user_id;
 		
 		
 	}
@@ -27,24 +29,30 @@ public void create(User newUser) throws ValidationException{
 	}
 	
 	
-	public void update(int id , User  newUser) throws ValidationException {
-		UserValidator.validate(newUser);
+	public static void update(int id , User  newUser) throws ValidationException {
+		UserValidator.validateForUpdate(id , newUser);
 		UserDAO userObj = new UserDAO();
-		userObj.update(12, newUser);
-	}
-	
-	
-	public void delete(int id) {
-		User newUser4 = new User();
-		newUser4.setActive(false);
 		
-		UserDAO userObj = new UserDAO();
-		userObj.delete(12);
+		 userObj.update(id, newUser);
 	}
 	
-	public User getById(int userId) {
+	
+	public void delete(int id) throws ValidationException {
+		UserValidator.validateForId(id);
+		UserDAO userObj = new UserDAO();
+		userObj.delete(id);
+	}
+	
+	public static User getById(int userId) throws ValidationException {
+		UserValidator.validateForId(userId);
 		UserDAO userObj = new UserDAO();
 		return userObj.findById(userId);
 		
+	}
+	
+	public static User getByEmail(String email) throws ValidationException{
+		UserValidator.validateForEmail(email);
+		UserDAO ud = new UserDAO();
+		return ud.findByEmail(email);
 	}
 }
