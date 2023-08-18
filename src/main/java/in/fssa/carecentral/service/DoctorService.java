@@ -8,6 +8,12 @@ import java.util.Set;
 import in.fssa.carecentral.dao.*;
 
 public class DoctorService {
+	
+	/**
+	 * 
+	 * @param newDoctor
+	 * @throws ValidationException
+	 */
 	public void create(DoctorDTO newDoctor) throws ValidationException {
 		UserService us = new UserService();
 		
@@ -31,7 +37,11 @@ public class DoctorService {
 	}
 	
 	
-
+	/**
+	 * 
+	 * @return doctorList
+	 * @throws ValidationException
+	 */
 	public Set<DoctorDTO> getAll() throws ValidationException {
 		DoctorDAO ddao = new DoctorDAO();
 		Set<DoctorDTO> doctorList = ddao.findAll();
@@ -40,6 +50,12 @@ public class DoctorService {
 	
 	
 
+	/**
+	 * 
+	 * @param id
+	 * @param newDoctor
+	 * @throws ValidationException
+	 */
 	public void update(int id, Doctor newDoctor) throws ValidationException {
 		DoctorValidator.validate1(newDoctor,id);
 		DoctorDAO ddao = new DoctorDAO();
@@ -65,13 +81,23 @@ public class DoctorService {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @throws ValidationException
+	 */
 	public void delete(int id) throws ValidationException {
 		DoctorValidator.validateForDoctorId(id);
 		DoctorDAO ddao = new DoctorDAO();
 		ddao.delete(id);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return doctor detail
+	 * @throws ValidationException
+	 */
 	public DoctorDTO getById(int id) throws ValidationException {
 		DoctorValidator.validateForDoctorId(id);
 		DoctorDAO dd = new DoctorDAO();
@@ -79,17 +105,33 @@ public class DoctorService {
 		
 	}
 	
+	/**
+	 * 
+	 * @param email
+	 * @return doctor detail
+	 * @throws ValidationException
+	 */
 	public DoctorDTO getByEmail(String email) throws ValidationException{
 		DoctorValidator.validateForEmail(email);
 		DoctorDAO dd = new DoctorDAO();
 		return dd.findDoctorByEmail(email);
 	}
 	
+	/**
+	 * 
+	 * @param year
+	 * @return month
+	 */
 	public static double convertYearToMonth(double year) {
 		double month = year*12;
 		return month;
 	}
 	
+	/**
+	 * 
+	 * @param month
+	 * @return year
+	 */
 	public static double convertMonthToYear(double month) {
 		double year = month/12;
 		return year;

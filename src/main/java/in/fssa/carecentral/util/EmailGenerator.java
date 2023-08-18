@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class EmailGenerator {
 
+	/**
+	 * 
+	 * @return email
+	 */
 	public static String generate() {
 		Random r = new Random();
 		

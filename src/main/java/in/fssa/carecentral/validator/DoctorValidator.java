@@ -8,6 +8,12 @@ import in.fssa.carecentral.util.StringUtil;
 
 public class DoctorValidator extends UserValidator{
 	
+	/**
+	 * 
+	 * @param newdoctor
+	 * @param id
+	 * @throws ValidationException
+	 */
 	public static void validate1(Doctor newdoctor, int id) throws ValidationException {
 		if(newdoctor == null) {
 			throw new ValidationException("Doctor cannot be null");
@@ -34,7 +40,11 @@ public class DoctorValidator extends UserValidator{
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param newDoctor
+	 * @throws ValidationException
+	 */
 	public static void validate(DoctorDTO newDoctor) throws ValidationException {
 		if(newDoctor == null) {
 			throw new ValidationException("Doctor cannot be null");
@@ -54,7 +64,11 @@ public class DoctorValidator extends UserValidator{
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @throws ValidationException
+	 */
 	public static void validateForDoctorId(int id) throws ValidationException {
 		if(id<=0) {
 			throw new ValidationException("id cannot be negative");

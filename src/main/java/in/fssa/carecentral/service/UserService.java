@@ -11,6 +11,12 @@ import in.fssa.carecentral.dto.DoctorDTO;
 
 
 public class UserService {
+	/**
+	 * 
+	 * @param newUser
+	 * @return user_id
+	 * @throws ValidationException
+	 */
 	public int create(User newUser) throws ValidationException{
 		
 		UserValidator.validateForCreate(newUser);
@@ -22,6 +28,11 @@ public class UserService {
 		
 	}
 	
+	/**
+	 * 
+	 * @return userArray
+	 */
+	
 	public Set<User> getAll() {
 		UserDAO userObj = new UserDAO();
 		Set<User> userArray = userObj.findAll();
@@ -29,6 +40,13 @@ public class UserService {
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @param id
+	 * @param newUser
+	 * @throws ValidationException
+	 */
 	public static void update(int id , User  newUser) throws ValidationException {
 		UserValidator.validateForUpdate(id , newUser);
 		UserDAO userObj = new UserDAO();
@@ -36,13 +54,36 @@ public class UserService {
 		 userObj.update(id, newUser);
 	}
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @throws ValidationException
+	 */
 	public void delete(int id) throws ValidationException {
 		UserValidator.validateForId(id);
 		UserDAO userObj = new UserDAO();
 		userObj.delete(id);
 	}
 	
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws ValidationException
+	 */
+	public void reactivate(int id) throws ValidationException {
+		UserValidator.validateForId(id);
+		UserDAO userObj = new UserDAO();
+		userObj.reactivate(id);
+	}
+	
+	
+	/**
+	 * 
+	 * @param userId
+	 * @return User
+	 * @throws ValidationException
+	 */
 	public static User getById(int userId) throws ValidationException {
 		UserValidator.validateForId(userId);
 		UserDAO userObj = new UserDAO();
@@ -50,6 +91,13 @@ public class UserService {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * @param email
+	 * @return User
+	 * @throws ValidationException
+	 */
 	public static User getByEmail(String email) throws ValidationException{
 		UserValidator.validateForEmail(email);
 		UserDAO ud = new UserDAO();

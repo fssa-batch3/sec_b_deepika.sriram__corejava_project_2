@@ -11,10 +11,15 @@ import java.util.Set;
 import in.fssa.carecentral.interface_files.UserInterface;
 import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.enumFiles.*;
+import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.util.ConnectionUtil;
 
 public class UserDAO implements UserInterface {
-
+	
+	/**
+	 
+	 * @return userList
+	 */
 	public Set<User> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -52,6 +57,12 @@ public class UserDAO implements UserInterface {
 
 	
 	
+	/**
+	 * 
+	 * @param newUser
+	 * @return user_id
+	 * @throws ValidationException
+	 */
 	@Override
 	public int create(User newUser) throws RuntimeException {
 		Connection con = null;
@@ -96,6 +107,11 @@ public class UserDAO implements UserInterface {
 		return newUser.getId();
 	}
 
+	/**
+	 * 
+	 * @param newUser
+	 * @param id
+	 */
 	@Override
 	public void update(int id, User newUser) {
 		Connection con = null;
@@ -133,6 +149,11 @@ public class UserDAO implements UserInterface {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param id
+	 */
 	@Override
 	public void delete(int id) {
 		Connection con = null;
@@ -157,7 +178,41 @@ public class UserDAO implements UserInterface {
 			ConnectionUtil.close(con, ps);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 */
+	
+	public void reactivate(int id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "UPDATE users SET is_active = 1 WHERE user_id = ?";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			int rowsAffected = ps.executeUpdate();
+			if (rowsAffected > 0) {
+				System.out.println("User had been deleted successfully");
+			} else {
+				throw new RuntimeException("User does not exist");
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionUtil.close(con, ps);
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return User
+	 */
 	@Override
 	public User findById(int id) {
 		Connection con = null;
@@ -194,6 +249,11 @@ public class UserDAO implements UserInterface {
 		return user;
 	}
 
+	/**
+	 * 
+	 * @param email
+	 * @return User
+	 */
 	@Override
 	public User findByEmail(String email) {
 		Connection con = null;
@@ -231,6 +291,10 @@ public class UserDAO implements UserInterface {
 		return user;
 	}
 
+	/**
+	 * 
+	 * @return count of users
+	 */
 	@Override
 	public int count() {
 		Connection con = null;

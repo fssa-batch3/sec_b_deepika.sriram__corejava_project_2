@@ -17,6 +17,11 @@ import in.fssa.carecentral.util.ConnectionUtil;
 
 public class DoctorDAO {
 
+	/**
+	 * 
+	 * @param newDoctor
+	 * @param id
+	 */
 	public void create(DoctorDTO newDoctor , int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -46,7 +51,11 @@ public class DoctorDAO {
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @return list of doctors
+	 * @throws ValidationException
+	 */
 	public Set<DoctorDTO> findAll() throws ValidationException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -85,7 +94,12 @@ public class DoctorDAO {
 		return doctorList;
 	}
 
-	
+	/**
+	 * 
+	 * @param id
+	 * @param newDoctor
+	 * @throws ValidationException
+	 */
 	public void update(int id, Doctor  newDoctor) throws ValidationException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -112,7 +126,10 @@ public class DoctorDAO {
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @param id
+	 */
 	public void delete(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -137,6 +154,11 @@ public class DoctorDAO {
 		
 	}
 
+	/**
+	 *  
+	 * @param id
+	 * @return doctor
+	 */
 	public Doctor findById(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -167,6 +189,11 @@ public class DoctorDAO {
 		return d;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return doctor
+	 */
 	public DoctorDTO findDoctorById(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -206,6 +233,12 @@ public class DoctorDAO {
 		return dd;
 	}
 	
+	
+	/**
+	 * 
+	 * @param email
+	 * @return doctor
+	 */
 	public DoctorDTO findDoctorByEmail(String email) {
 		Connection con = null;
 		PreparedStatement ps = null;

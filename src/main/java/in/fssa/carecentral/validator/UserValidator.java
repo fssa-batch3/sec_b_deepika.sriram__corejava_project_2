@@ -9,6 +9,12 @@ import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.util.StringUtil;
 
 public class UserValidator {
+	
+	/**
+	 * 
+	 * @param user
+	 * @throws ValidationException
+	 */
 	public static void validateForCreate(User user) throws ValidationException {
 		if(user == null) {
 			throw new ValidationException("User cannot be null");
@@ -59,6 +65,13 @@ public class UserValidator {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * @param id
+	 * @param user
+	 * @throws ValidationException
+	 */
 	public static void validateForUpdate(int id,User user) throws ValidationException{
 		if(user == null) {
 			throw new ValidationException("user cannot be null or empty");
@@ -101,6 +114,12 @@ public class UserValidator {
         }
 	}
 	
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws ValidationException
+	 */
 	public static void validateForId(int id) throws ValidationException {
 		if(id <=0) {
 			throw new ValidationException("id cannot be negative");
@@ -113,6 +132,12 @@ public class UserValidator {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * @param email
+	 * @throws ValidationException
+	 */
 	public static void validateForEmail(String email) throws ValidationException{
 		StringUtil.rejectIfInvalidString(email, "email");
 		
