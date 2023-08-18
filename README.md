@@ -251,11 +251,11 @@ H-- Yes --> I[Doctor DAO : update]
 #### Flow:
 ``` mermaid
 graph TD;
-A[User Service:Delete Doctor] -->A1[Form validation]
+A[Doctor Service:Delete Doctor] -->A1[Form validation]
 A1--Yes --> B[business validation]
 A1--No-->B2[throw validation exception]
-B -- Yes -->C[User DAO : Delete doctor]
-C -->D[User Service : Doctor deleted successfully]
+B -- Yes -->C[Doctor DAO : Delete doctor]
+C -->D[Doctor Service : Doctor deleted successfully]
 B -- No -->E[Doctor not found to delete]
 ```
 
@@ -273,9 +273,7 @@ B -- No -->E[Doctor not found to delete]
 #### Flow:
 ```mermaid
 graph TD;
-A[User Service : find all doctors] -->B[User DAO : find all doctors]
-B-->C[returning all doctors which is active in the user table]
-C -->D[Doctor Service : find all]
+D[Doctor Service : find all]
 D -->E[Doctor DAO : find all doctors]
 E -->F[returning all doctors]
 ```
@@ -308,11 +306,5 @@ B--No-->C2[Throws validation exception]
 C1--Yes-->D1[Doctor DAO : find by id]
 D1-->E[Doctor Service : Return the doctor]
 C1--No-->D2[throws validation exception]
-E-->F[User Service : find by id]
-F-->G[Form validation]
-G--Yes-->H1[Business validation]
-G--No-->H2[throws exception]
-H1--Yes-->I1[User DAO : find by id]
-H1--No-->I2[throws validation exception]
-I1-->J[User Service : returns first name and last name]
+
 ```
