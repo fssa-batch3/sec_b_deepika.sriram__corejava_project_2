@@ -18,15 +18,15 @@ public class TestCreateDoctor {
 		DoctorService ds = new DoctorService();
 		
 		DoctorDTO ddto = new DoctorDTO();
-		ddto.setFirstName("Kalaivani");
-		ddto.setLastName("Ramalingam");
-		ddto.setAge(50);
+		ddto.setFirstName("Prema");
+		ddto.setLastName("Balachandran");
+		ddto.setAge(45);
 		ddto.setGender(Gender.F);
-		ddto.setMobileNumber(9012349876l);
-		ddto.setEmailId("kalaivani@gmail.com");
-		ddto.setPassword("Kalai@1234");
+		ddto.setMobileNumber(7345872311l);
+		ddto.setEmailId("prema123@gmail.com");
+		ddto.setPassword("PrEmA@#@#1234");
 		ddto.setQualifications("MBBS , MS-Obstetrics and gynecologist");
-		ddto.setExperience(25);
+		ddto.setExperience(10);
 		ddto.setDepartment("Obstetrician and Gynecologist");
 		
 		assertDoesNotThrow(()->{

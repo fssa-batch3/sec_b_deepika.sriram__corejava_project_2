@@ -16,7 +16,7 @@ public class TestDeleteDoctor {
 	public void testDeleteDoctorWithValidId() {
 		DoctorService ds = new DoctorService();
 		assertDoesNotThrow(()->{
-			ds.delete(11);
+			ds.delete(2);
 		});
 	}
 	

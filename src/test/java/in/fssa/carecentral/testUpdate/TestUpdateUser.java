@@ -46,7 +46,7 @@ public class TestUpdateUser {
 		user.setPassword("SuJaThA@#1972");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			userService.update(10, user);
+			userService.update(12, user);
 		});
 		
 		String m1 = "User doesn't exists";

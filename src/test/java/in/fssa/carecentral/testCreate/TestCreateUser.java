@@ -23,7 +23,7 @@ public class TestCreateUser {
 		user.setAge(51);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7845854167l);
-		user.setEmailId("sujathasriram@yahoo.com");
+		user.setEmailId("deepasri@gmail.com");
 		user.setPassword("SuJaThA@#1972");
 		
 		assertDoesNotThrow(() ->{
@@ -161,6 +161,7 @@ public class TestCreateUser {
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
 		user.setEmailId("asdf@gmail.com");
+		
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -303,7 +304,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("deepika@gmail.com");
+		user.setEmailId("deepu2005@gmail.com");
 		user.setPassword(null);
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -311,6 +312,7 @@ public class TestCreateUser {
 		});
 		String m1 = "password cannot be null or empty";
 		String m2 = excp.getMessage();
+		System.out.println(m2);
 		assertTrue(m1.equals(m2));
 	}
 	
@@ -323,7 +325,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("deepika@gmail.com");
+		user.setEmailId("deepusri@gmail.com");
 		user.setPassword("");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -331,6 +333,7 @@ public class TestCreateUser {
 		});
 		String m1 = "password cannot be null or empty";
 		String m2 = excp.getMessage();
+		
 		assertTrue(m1.equals(m2));
 	}
 	
@@ -343,7 +346,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("deepika@gmail.com");
+		user.setEmailId("deepusri@gmail.com");
 		user.setPassword("deepika123");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{

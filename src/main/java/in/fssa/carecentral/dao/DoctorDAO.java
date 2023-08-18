@@ -54,25 +54,23 @@ public class DoctorDAO {
 		Set<DoctorDTO> doctorList =null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM doctors WHERE is_active = 1";
+			String query = "SELECT * FROM users as u INNER JOIN doctors AS d ON u.user_id = d.user_id WHERE d.is_active = 1";
 			ps = con.prepareStatement(query);
 			doctorList  = new HashSet<DoctorDTO>();
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				DoctorDTO dto = new DoctorDTO();
 				dto.setId(rs.getInt("doctor_id"));
-				dto.setUserId(rs.getInt("user_id"));
+				dto.setUserId(rs.getInt("d.user_id"));
 				dto.setQualifications(rs.getString("qualifications"));
 				dto.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
 				dto.setDepartment(rs.getString("department"));
-				
-				User user = UserService.getById(dto.getUserId());
-				dto.setFirstName(user.getFirstName());
-				dto.setLastName(user.getLastName());
-				dto.setAge(user.getAge());
-				dto.setGender(user.getGender());
-				dto.setMobileNumber(user.getMobileNumber());
-				dto.setEmailId(user.getEmailId());
+				dto.setFirstName(rs.getString("first_name"));
+				dto.setLastName(rs.getString("last_name"));
+				dto.setAge(rs.getInt("age"));
+				dto.setGender(Gender.valueOf(rs.getString("gender")));
+				dto.setMobileNumber(rs.getLong("mobile_number"));
+				dto.setEmailId(rs.getString("email_id"));
 				doctorList.add(dto);
 			}
 			
