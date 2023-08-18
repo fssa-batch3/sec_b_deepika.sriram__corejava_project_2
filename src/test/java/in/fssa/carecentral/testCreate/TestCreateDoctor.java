@@ -10,6 +10,7 @@ import in.fssa.carecentral.dto.DoctorDTO;
 import in.fssa.carecentral.enumFiles.Gender;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.service.DoctorService;
+import in.fssa.carecentral.util.EmailGenerator;
 
 public class TestCreateDoctor {
 
@@ -23,7 +24,7 @@ public class TestCreateDoctor {
 		ddto.setAge(45);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(7345872311l);
-		ddto.setEmailId("prema123@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("PrEmA@#@#1234");
 		ddto.setQualifications("MBBS , MS-Obstetrics and gynecologist");
 		ddto.setExperience(10);
@@ -57,7 +58,7 @@ public class TestCreateDoctor {
 		ddto.setAge(48);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(8967454501l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -83,7 +84,7 @@ public class TestCreateDoctor {
 		ddto.setAge(48);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(8967454501l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -108,7 +109,7 @@ public class TestCreateDoctor {
 		ddto.setAge(48);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(8967454501l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -133,7 +134,7 @@ public class TestCreateDoctor {
 		ddto.setAge(48);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(8967454501l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -158,7 +159,7 @@ public class TestCreateDoctor {
 		ddto.setAge(-23);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(8967454501l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -183,7 +184,7 @@ public class TestCreateDoctor {
 		ddto.setAge(16);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(8967454501l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -208,7 +209,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(0);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -233,7 +234,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(0);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -245,6 +246,7 @@ public class TestCreateDoctor {
 		
 		String m1 = "invalid mobile number";
 		String m2 = ex.getMessage();
+		System.out.println(m2);
 		assertTrue(m1.equals(m2));
 	}
 	
@@ -332,7 +334,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword(null);
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -356,7 +358,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -380,7 +382,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("1234567890");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -405,7 +407,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("Nithya@1234");
 		ddto.setQualifications(null);
 		ddto.setExperience(20);
@@ -429,7 +431,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("Nithya@1234");
 		ddto.setQualifications("");
 		ddto.setExperience(20);
@@ -453,7 +455,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("Nithya@1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -477,7 +479,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("Nithya@1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
@@ -501,7 +503,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("Nithya@1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(0);
@@ -525,7 +527,7 @@ public class TestCreateDoctor {
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
 		ddto.setMobileNumber(9034121267l);
-		ddto.setEmailId("nithya@gmail.com");
+		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("Nithya@1234");
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(5);

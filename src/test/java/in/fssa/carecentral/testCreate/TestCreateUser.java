@@ -10,6 +10,7 @@ import in.fssa.carecentral.enumFiles.Gender;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.service.UserService;
+import in.fssa.carecentral.util.EmailGenerator;
 
 public class TestCreateUser {
 	
@@ -23,7 +24,7 @@ public class TestCreateUser {
 		user.setAge(51);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7845854167l);
-		user.setEmailId("deepasri@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("SuJaThA@#1972");
 		
 		assertDoesNotThrow(() ->{
@@ -53,7 +54,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(9876543210l);
-		user.setEmailId("abcd@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
@@ -75,7 +76,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(9876543210l);
-		user.setEmailId("abcd@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
@@ -97,7 +98,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(9876543210l);
-		user.setEmailId("abcd@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
@@ -119,7 +120,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(9876543210l);
-		user.setEmailId("abcd@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
@@ -140,7 +141,7 @@ public class TestCreateUser {
 		user.setAge(-56);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("asdf@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -160,7 +161,7 @@ public class TestCreateUser {
 		user.setAge(12);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("asdf@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		
 		user.setPassword("Deepu*&*&1234");
 		
@@ -181,7 +182,7 @@ public class TestCreateUser {
 		user.setAge(20);
 		user.setGender(Gender.F);
 		user.setMobileNumber(0);
-		user.setEmailId("asdf@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -202,7 +203,7 @@ public class TestCreateUser {
 		user.setAge(20);
 		user.setGender(Gender.F);
 		user.setMobileNumber(4598214309l);
-		user.setEmailId("asdf@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -304,7 +305,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("deepu2005@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword(null);
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -325,7 +326,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("deepusri@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
@@ -346,7 +347,7 @@ public class TestCreateUser {
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("deepusri@gmail.com");
+		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("deepika123");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{

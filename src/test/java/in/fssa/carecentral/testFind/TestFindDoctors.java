@@ -23,7 +23,7 @@ public class TestFindDoctors {
 	public void testFindDoctorByValidDoctorId() {
 		DoctorService ds = new DoctorService();
 		assertDoesNotThrow(()->{
-			ds.getById(2);
+			ds.getById(1);
 		});
 	}
 	
