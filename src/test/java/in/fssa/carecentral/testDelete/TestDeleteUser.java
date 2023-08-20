@@ -15,8 +15,8 @@ public class TestDeleteUser {
 	public void testDeleteUserWithValidId() {
 		UserService us = new UserService();
 		assertDoesNotThrow(()->{
-			UserService.reactivate(3);
-			us.delete(3);
+			UserService.reactivate(4);
+			us.delete(4);
 			
 		});
 	}
