@@ -95,6 +95,16 @@ public class DoctorService {
 	/**
 	 * 
 	 * @param id
+	 * @throws ValidationException
+	 */
+	public  static void reactivate(int id){
+		DoctorDAO docObj = new DoctorDAO();
+		docObj.reactivate(id);
+	}
+	
+	/**
+	 * 
+	 * @param id
 	 * @return doctor detail
 	 * @throws ValidationException
 	 */

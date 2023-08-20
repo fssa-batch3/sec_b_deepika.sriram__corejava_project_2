@@ -280,6 +280,28 @@ public class DoctorDAO {
 		
 	}
 
+	public void reactivate(int id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "UPDATE doctors SET is_active = 1 WHERE doctor_id = ?";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			int rowsAffected = ps.executeUpdate();
+			if(rowsAffected<=0) {
+				throw new RuntimeException("Doctor does not exist");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionUtil.close(con, ps);
+		}
+	}
+
 	
 
 }

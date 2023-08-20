@@ -71,8 +71,7 @@ public class UserService {
 	 * @param id
 	 * @throws ValidationException
 	 */
-	public void reactivate(int id) throws ValidationException {
-		UserValidator.validateForId(id);
+	public  static void reactivate(int id) throws ValidationException {
 		UserDAO userObj = new UserDAO();
 		userObj.reactivate(id);
 	}

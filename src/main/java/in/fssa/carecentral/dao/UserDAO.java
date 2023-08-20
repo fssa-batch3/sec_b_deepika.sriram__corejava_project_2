@@ -193,9 +193,7 @@ public class UserDAO implements UserInterface {
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			int rowsAffected = ps.executeUpdate();
-			if (rowsAffected > 0) {
-				System.out.println("User had been deleted successfully");
-			} else {
+			if(rowsAffected<=0) {
 				throw new RuntimeException("User does not exist");
 			}
 

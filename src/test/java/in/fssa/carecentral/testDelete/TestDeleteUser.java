@@ -15,10 +15,12 @@ public class TestDeleteUser {
 	public void testDeleteUserWithValidId() {
 		UserService us = new UserService();
 		assertDoesNotThrow(()->{
-			us.delete(2);
-			us.reactivate(2);
+			UserService.reactivate(3);
+			us.delete(3);
+			
 		});
 	}
+	
 	
 	@Test
 	public void testDeleteUserWithInvalidId() {
