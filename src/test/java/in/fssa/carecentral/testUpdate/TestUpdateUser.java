@@ -27,7 +27,7 @@ public class TestUpdateUser {
 		user.setPassword("Praveen@2004");
 		
 		assertDoesNotThrow(() ->{
-			userService.update(4, user);
+			userService.update(27, user);
 			
 			
 		});

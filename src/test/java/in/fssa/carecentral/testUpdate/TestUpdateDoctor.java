@@ -62,7 +62,7 @@ public class TestUpdateDoctor {
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(10, d);
+			ds.update(6, d);
 		});
 		String m1 = "Doctor doesn't exists";
 		String m2 = ex.getMessage();
