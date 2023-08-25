@@ -1,5 +1,5 @@
 package in.fssa.carecentral.model;
-import in.fssa.carecentral.enumFiles.*;
+import in.fssa.carecentral.enumfiles.*;
 public abstract class UserEntity implements Comparable<UserEntity>{
 	private int id;
 	private String firstName;

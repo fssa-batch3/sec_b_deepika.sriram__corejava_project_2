@@ -17,7 +17,7 @@ public class TestDeleteDoctor {
 		DoctorService ds = new DoctorService();
 		DoctorService.reactivate(8);
 		assertDoesNotThrow(()->{
-			ds.delete(8);
+			ds.deleteDoctor(8);
 		});
 	}
 	
@@ -25,7 +25,7 @@ public class TestDeleteDoctor {
 	public void testDeleteDoctorWithInvalidId() {
 		DoctorService ds = new DoctorService();
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			ds.delete(-45);
+			ds.deleteDoctor(-45);
 		});
 		String m1 = "id cannot be negative";
 		String m2 = excp.getMessage();

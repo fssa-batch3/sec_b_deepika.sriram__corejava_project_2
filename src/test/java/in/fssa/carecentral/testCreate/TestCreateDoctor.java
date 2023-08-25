@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import in.fssa.carecentral.dto.DoctorDTO;
-import in.fssa.carecentral.enumFiles.Gender;
+import in.fssa.carecentral.enumfiles.Gender;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.service.DoctorService;
 import in.fssa.carecentral.util.EmailGenerator;
@@ -31,7 +31,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("Obstetrician and Gynecologist");
 		
 		assertDoesNotThrow(()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 	}
 	
@@ -41,7 +41,7 @@ public class TestCreateDoctor {
 		
 		DoctorDTO ddto = null;
 		Exception ex = assertThrows(ValidationException.class,() ->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		String m1 = "Doctor cannot be null";
 		String m2 = ex.getMessage();
@@ -65,7 +65,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "first name cannot be null or empty";
@@ -91,12 +91,37 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "first name cannot be null or empty";
 		String m2 = ex.getMessage();
 		assertTrue(m1.equals(m2));
+	}
+	
+	@Test
+	public void testCreateDoctorWithImproperFirstName() {
+		DoctorService ds = new DoctorService();
+		DoctorDTO ddto = new DoctorDTO();
+		ddto.setFirstName("nithya$%$%123");
+		ddto.setLastName("Ramamoorthy");
+		ddto.setAge(48);
+		ddto.setGender(Gender.F);
+		ddto.setMobileNumber(8967454501l);
+		ddto.setEmailId(EmailGenerator.generate());
+		ddto.setPassword("NiThYa*$%1234");
+		ddto.setQualifications("MBBS");
+		ddto.setExperience(20);
+		ddto.setDepartment("General Physician");
+		
+		Exception ex = assertThrows(ValidationException.class , ()->{
+			ds.createDoctor(ddto);
+		});
+		
+		String m1 = "first name should contain only alphabets not numbers and symbols";
+		String m2 = ex.getMessage();
+		assertTrue(m1.equals(m2));
+		
 	}
 	
 	@Test
@@ -116,7 +141,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "last name cannot be null or empty";
@@ -141,12 +166,37 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "last name cannot be null or empty";
 		String m2 = ex.getMessage();
 		assertTrue(m1.equals(m2));
+	}
+	
+	@Test
+	public void testCreateDoctorWithImproperLastName() {
+		DoctorService ds = new DoctorService();
+		DoctorDTO ddto = new DoctorDTO();
+		ddto.setFirstName("Nithya");
+		ddto.setLastName("Ramamoorthy1212");
+		ddto.setAge(48);
+		ddto.setGender(Gender.F);
+		ddto.setMobileNumber(8967454501l);
+		ddto.setEmailId(EmailGenerator.generate());
+		ddto.setPassword("NiThYa*$%1234");
+		ddto.setQualifications("MBBS");
+		ddto.setExperience(20);
+		ddto.setDepartment("General Physician");
+		
+		Exception ex = assertThrows(ValidationException.class , ()->{
+			ds.createDoctor(ddto);
+		});
+		
+		String m1 = "last name should contain only alphabets not numbers and symbols";
+		String m2 = ex.getMessage();
+		assertTrue(m1.equals(m2));
+		
 	}
 	
 	@Test
@@ -166,7 +216,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "age cannot be negative";
@@ -191,7 +241,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "age must be atleast greater than or equal to 18";
@@ -216,7 +266,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "invalid mobile number";
@@ -241,7 +291,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "invalid mobile number";
@@ -267,7 +317,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "email cannot be null or empty";
@@ -292,7 +342,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "email cannot be null or empty";
@@ -317,7 +367,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "email doesn't match the required format";
@@ -341,7 +391,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "password cannot be null or empty";
@@ -365,7 +415,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "password cannot be null or empty";
@@ -389,7 +439,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "Password doesn't match the required format";
@@ -414,7 +464,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "qualifications cannot be null or empty";
@@ -438,7 +488,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "qualifications cannot be null or empty";
@@ -462,7 +512,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment(null);
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "department cannot be null or empty";
@@ -486,7 +536,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "department cannot be null or empty";
@@ -510,7 +560,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Medicine");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "Invalid yrs of experience";
@@ -534,7 +584,7 @@ public class TestCreateDoctor {
 		ddto.setDepartment("General Medicine");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.create(ddto);
+			ds.createDoctor(ddto);
 		});
 		
 		String m1 = "Doctor should have atleast 10 yrs of experience";

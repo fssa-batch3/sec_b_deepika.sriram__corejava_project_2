@@ -14,8 +14,8 @@ public class DoctorService {
 	 * @param newDoctor
 	 * @throws ValidationException
 	 */
-	public void create(DoctorDTO newDoctor) throws ValidationException {
-		UserService us = new UserService();
+	public void createDoctor(DoctorDTO newDoctor) throws ValidationException {
+		UserService userService = new UserService();
 		
 		
 		DoctorValidator.validate(newDoctor);
@@ -28,11 +28,11 @@ public class DoctorService {
 		user.setEmailId(newDoctor.getEmailId());
 		user.setPassword(newDoctor.getPassword());
 
-		int user_id = us.create(user);
+		int userId = userService.createUser(user);
 
 		
-		DoctorDAO dd = new DoctorDAO();
-		dd.create(newDoctor, user_id);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		doctorDAO.create(newDoctor, userId);
 
 	}
 	
@@ -42,9 +42,9 @@ public class DoctorService {
 	 * @return doctorList
 	 * @throws ValidationException
 	 */
-	public Set<DoctorDTO> getAll() throws ValidationException {
-		DoctorDAO ddao = new DoctorDAO();
-		Set<DoctorDTO> doctorList = ddao.findAll();
+	public Set<DoctorDTO> listAllDoctor() throws ValidationException {
+		DoctorDAO doctorDAO = new DoctorDAO();
+		Set<DoctorDTO> doctorList = doctorDAO.findAll();
 		return doctorList;
 	}
 	
@@ -56,12 +56,12 @@ public class DoctorService {
 	 * @param newDoctor
 	 * @throws ValidationException
 	 */
-	public void update(int id, Doctor newDoctor) throws ValidationException {
+	public void updateDoctor(int id, Doctor newDoctor) throws ValidationException {
 		DoctorValidator.validate1(newDoctor,id);
-		DoctorDAO ddao = new DoctorDAO();
+		DoctorDAO doctorDAO = new DoctorDAO();
 		
-		Doctor user1 = ddao.findById(id);
-		int uid = user1.getUserId();
+		Doctor user1 = doctorDAO.findById(id);
+		int userId = user1.getUserId();
 		
 		User user = new User();
 		user.setFirstName(  newDoctor.getFirstName() ); 
@@ -70,14 +70,14 @@ public class DoctorService {
 		user.setGender(newDoctor.getGender());
 		user.setMobileNumber(newDoctor.getMobileNumber());
 		user.setPassword(newDoctor.getPassword());
-		UserService.update(uid , user );
+		UserService.updateUser(userId , user );
 
-		 Doctor doc = new Doctor();
-		 doc.setQualifications( newDoctor.getQualifications() );
-		 doc.setExperience(newDoctor.getExperience());
-		 doc.setDepartment(newDoctor.getDepartment());
+		 Doctor doctor = new Doctor();
+		 doctor.setQualifications( newDoctor.getQualifications() );
+		 doctor.setExperience(newDoctor.getExperience());
+		 doctor.setDepartment(newDoctor.getDepartment());
 		 
-		ddao.update(id, doc);
+		doctorDAO.update(id, doctor);
 	}
 	
 	
@@ -86,10 +86,10 @@ public class DoctorService {
 	 * @param id
 	 * @throws ValidationException
 	 */
-	public void delete(int id) throws ValidationException {
+	public void deleteDoctor(int id) throws ValidationException {
 		DoctorValidator.validateForDoctorId(id);
-		DoctorDAO ddao = new DoctorDAO();
-		ddao.delete(id);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		doctorDAO.delete(id);
 	}
 	
 	/**
@@ -98,8 +98,8 @@ public class DoctorService {
 	 * @throws ValidationException
 	 */
 	public  static void reactivate(int id){
-		DoctorDAO docObj = new DoctorDAO();
-		docObj.reactivate(id);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		doctorDAO.reactivate(id);
 	}
 	
 	/**
@@ -108,10 +108,10 @@ public class DoctorService {
 	 * @return doctor detail
 	 * @throws ValidationException
 	 */
-	public DoctorDTO getById(int id) throws ValidationException {
+	public DoctorDTO getDoctorById(int id) throws ValidationException {
 		DoctorValidator.validateForDoctorId(id);
-		DoctorDAO dd = new DoctorDAO();
-		return dd.findDoctorById(id);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		return doctorDAO.findDoctorById(id);
 		
 	}
 	
@@ -121,10 +121,10 @@ public class DoctorService {
 	 * @return doctor detail
 	 * @throws ValidationException
 	 */
-	public DoctorDTO getByEmail(String email) throws ValidationException{
+	public DoctorDTO getDoctorByEmail(String email) throws ValidationException{
 		DoctorValidator.validateForEmail(email);
-		DoctorDAO dd = new DoctorDAO();
-		return dd.findDoctorByEmail(email);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		return doctorDAO.findDoctorByEmail(email);
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package in.fssa.carecentral.interface_files;
+package in.fssa.carecentral.interfaces;
 
 import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.model.UserEntity;

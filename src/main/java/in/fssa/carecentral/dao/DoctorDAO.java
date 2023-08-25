@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 import in.fssa.carecentral.model.*;
 import in.fssa.carecentral.dto.DoctorDTO;
-import in.fssa.carecentral.enumFiles.Gender;
+import in.fssa.carecentral.enumfiles.Gender;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.service.DoctorService;
 import in.fssa.carecentral.service.UserService;
@@ -63,7 +63,7 @@ public class DoctorDAO {
 		Set<DoctorDTO> doctorList =null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM users as u INNER JOIN doctors AS d ON u.user_id = d.user_id WHERE d.is_active = 1";
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,first_name,last_name,age,gender,mobile_number,email_id FROM users as u INNER JOIN doctors AS d ON u.user_id = d.user_id WHERE d.is_active = 1";
 			ps = con.prepareStatement(query);
 			doctorList  = new HashSet<DoctorDTO>();
 			rs = ps.executeQuery();
@@ -166,7 +166,7 @@ public class DoctorDAO {
 		Doctor d = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM doctors WHERE is_active = 1 AND doctor_id = ?";
+			String query = "SELECT doctor_id,qualifications,experience,department,is_active,user_id FROM doctors WHERE is_active = 1 AND doctor_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -201,7 +201,7 @@ public class DoctorDAO {
 		DoctorDTO dd = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND doctor_id = ?";
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,first_name,last_name,age,gender,mobile_number,email_id,d.is_active FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND doctor_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -215,7 +215,6 @@ public class DoctorDAO {
 				dd.setGender(Gender.valueOf(rs.getString("gender")));
 				dd.setMobileNumber(rs.getLong("mobile_number"));
 				dd.setEmailId(rs.getString("email_id"));
-				dd.setPassword(rs.getString("password"));
 				dd.setQualifications(rs.getString("qualifications"));
 				dd.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
 				dd.setDepartment(rs.getString("department"));
@@ -247,7 +246,7 @@ public class DoctorDAO {
 		DoctorDTO dd = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND u.email_id = ?";
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,first_name,last_name,age,gender,mobile_number,email_id FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND u.email_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();

@@ -8,10 +8,10 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-import in.fssa.carecentral.interface_files.UserInterface;
 import in.fssa.carecentral.model.User;
-import in.fssa.carecentral.enumFiles.*;
+import in.fssa.carecentral.enumfiles.*;
 import in.fssa.carecentral.exception.ValidationException;
+import in.fssa.carecentral.interfaces.UserInterface;
 import in.fssa.carecentral.util.ConnectionUtil;
 
 public class UserDAO implements UserInterface {
@@ -27,7 +27,7 @@ public class UserDAO implements UserInterface {
 		Set<User> userList = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM users WHERE is_active = 1";
+			String query = "SELECT user_id,first_name,last_name,age,gender,mobile_number,email_id,is_active FROM users WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
 			userList = new HashSet<User>();
@@ -219,7 +219,7 @@ public class UserDAO implements UserInterface {
 		User user = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM users WHERE is_active = 1 AND user_id = ?";
+			String query = "SELECT user_id,first_name,last_name,age,gender,mobile_number,email_id,is_active FROM users WHERE is_active = 1 AND user_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -232,7 +232,6 @@ public class UserDAO implements UserInterface {
 				user.setGender(Gender.valueOf(rs.getString("gender")));
 				user.setMobileNumber(rs.getLong("mobile_number"));
 				user.setEmailId(rs.getString("email_id"));
-				user.setPassword(rs.getString("password"));
 				user.setActive(rs.getBoolean("is_active"));
 			}
 
@@ -260,7 +259,7 @@ public class UserDAO implements UserInterface {
 		User user = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM users WHERE is_active = 1 AND email_id = ?";
+			String query = "SELECT user_id,first_name,last_name,age,gender,mobile_number,email_id,is_active FROM users WHERE is_active = 1 AND email_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
@@ -273,7 +272,6 @@ public class UserDAO implements UserInterface {
 				user.setGender(Gender.valueOf(rs.getString("gender")));
 				user.setMobileNumber(rs.getLong("mobile_number"));
 				user.setEmailId(rs.getString("email_id"));
-				user.setPassword(rs.getString("password"));
 				user.setActive(rs.getBoolean("is_active"));
 			}
 

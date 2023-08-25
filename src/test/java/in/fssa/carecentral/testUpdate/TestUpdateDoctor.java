@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import in.fssa.carecentral.dto.DoctorDTO;
-import in.fssa.carecentral.enumFiles.Gender;
+import in.fssa.carecentral.enumfiles.Gender;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.Doctor;
 import in.fssa.carecentral.service.DoctorService;
@@ -29,7 +29,7 @@ public class TestUpdateDoctor {
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
 		assertDoesNotThrow(()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		
 	}
@@ -40,7 +40,7 @@ public class TestUpdateDoctor {
 		Doctor d = null;
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		
 		String m1 = "Doctor cannot be null";
@@ -62,7 +62,7 @@ public class TestUpdateDoctor {
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(6, d);
+			ds.updateDoctor(6, d);
 		});
 		String m1 = "Doctor doesn't exists";
 		String m2 = ex.getMessage();
@@ -83,7 +83,7 @@ public class TestUpdateDoctor {
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(-1, d);
+			ds.updateDoctor(-1, d);
 		});
 		String m1 = "id cannot be negative";
 		String m2 = ex.getMessage();
@@ -104,7 +104,7 @@ public class TestUpdateDoctor {
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "first name cannot be null or empty";
 		String m2 = ex.getMessage();
@@ -125,11 +125,33 @@ public class TestUpdateDoctor {
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "first name cannot be null or empty";
 		String m2 = ex.getMessage();
 		assertTrue(m1.equals(m2));
+	}
+	
+	@Test
+	public void testUpdateDoctorWithImproperFirstName() {
+		DoctorService ds = new DoctorService();
+		Doctor d = new Doctor();
+		d.setFirstName("Vani@#@#");
+		d.setLastName("Narayanan");
+		d.setAge(54);
+		d.setGender(Gender.F);
+		d.setMobileNumber(9023454512l);
+		d.setPassword("aAsdf***1234");
+		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
+		d.setExperience(30);
+		d.setDepartment("Gynecologist");
+		Exception ex = assertThrows(ValidationException.class , ()->{
+			ds.updateDoctor(1, d);
+		});
+		String m1 = "first name should contain only alphabets not numbers and symbols";
+		String m2 = ex.getMessage();
+		assertTrue(m1.equals(m2));
+		
 	}
 	
 	@Test
@@ -148,7 +170,7 @@ public class TestUpdateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, ddto);
+			ds.updateDoctor(1, ddto);
 		});
 		
 		String m1 = "last name cannot be null or empty";
@@ -172,7 +194,7 @@ public class TestUpdateDoctor {
 		ddto.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, ddto);
+			ds.updateDoctor(1, ddto);
 		});
 		
 		String m1 = "last name cannot be null or empty";
@@ -195,7 +217,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "age must be atleast greater than or equal to 18";
 		String m2 = ex.getMessage();
@@ -217,7 +239,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "invalid mobile number";
 		String m2 = ex.getMessage();
@@ -239,7 +261,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "mobile number doesn't match the required format";
 		String m2 = ex.getMessage();
@@ -262,7 +284,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "password cannot be null or empty";
 		String m2 = ex.getMessage();
@@ -284,7 +306,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "password cannot be null or empty";
 		String m2 = ex.getMessage();
@@ -306,7 +328,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "Password doesn't match the required format";
 		String m2 = ex.getMessage();
@@ -328,7 +350,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "qualifications cannot be null or empty";
 		String m2 = ex.getMessage();
@@ -350,7 +372,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "qualifications cannot be null or empty";
 		String m2 = ex.getMessage();
@@ -372,7 +394,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "Invalid yrs of experience";
 		String m2 = ex.getMessage();
@@ -394,7 +416,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("General Physician");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "Doctor should have atleast 10 yrs of experience";
 		String m2 = ex.getMessage();
@@ -416,7 +438,7 @@ public class TestUpdateDoctor {
 		d.setDepartment(null);
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "department cannot be null or empty";
 		String m2 = ex.getMessage();
@@ -438,7 +460,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.update(1, d);
+			ds.updateDoctor(1, d);
 		});
 		String m1 = "department cannot be null or empty";
 		String m2 = ex.getMessage();

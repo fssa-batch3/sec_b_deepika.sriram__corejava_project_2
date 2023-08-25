@@ -6,10 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import in.fssa.carecentral.enumFiles.Gender;
+import in.fssa.carecentral.enumfiles.Gender;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.service.UserService;
+import in.fssa.carecentral.util.EmailGenerator;
 
 
 public class TestUpdateUser {
@@ -27,7 +28,7 @@ public class TestUpdateUser {
 		user.setPassword("Praveen@2004");
 		
 		assertDoesNotThrow(() ->{
-			userService.update(27, user);
+			userService.updateUser(27, user);
 			
 			
 		});
@@ -46,7 +47,7 @@ public class TestUpdateUser {
 		user.setPassword("SuJaThA@#1972");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			userService.update(12, user);
+			userService.updateUser(12, user);
 		});
 		
 		String m1 = "User doesn't exists";
@@ -67,7 +68,7 @@ public class TestUpdateUser {
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.update(3,user);
+			us.updateUser(3,user);
 		});
 		
 		String m1 = "first name cannot be null or empty";
@@ -89,10 +90,29 @@ public class TestUpdateUser {
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.update(3,user);
+			us.updateUser(3,user);
 		});
 		
 		String m1 = "first name cannot be null or empty";
+		String m2 = excp.getMessage();
+		assertTrue(m1.equals(m2));
+	}
+	
+	@Test
+	public void testUpdateUserWithImproperFirstName() {
+		UserService us = new UserService();
+		User user = new User();
+		user.setFirstName("deepika4545");
+		user.setLastName("Shriram");
+		user.setAge(18);
+		user.setGender(Gender.F);
+		user.setMobileNumber(9876543210l);
+		user.setEmailId(EmailGenerator.generate());
+		user.setPassword("!@#$1234Deepu");
+		Exception excp = assertThrows(ValidationException.class , ()->{
+			us.createUser(user);
+		});
+		String m1 = "first name should contain only alphabets not numbers and symbols";
 		String m2 = excp.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -110,7 +130,7 @@ public class TestUpdateUser {
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		
 		String m1 = "last name cannot be null or empty";
@@ -131,10 +151,29 @@ public class TestUpdateUser {
 		user.setPassword("!@#$1234Deepu");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		
 		String m1 = "last name cannot be null or empty";
+		String m2 = excp.getMessage();
+		assertTrue(m1.equals(m2));
+	}
+	
+	@Test
+	public void testUpdateUserWithImproperLastName() {
+		UserService us = new UserService();
+		User user = new User();
+		user.setFirstName("Deepika");
+		user.setLastName("Shriram1965");
+		user.setAge(18);
+		user.setGender(Gender.F);
+		user.setMobileNumber(9876543210l);
+		user.setEmailId(EmailGenerator.generate());
+		user.setPassword("!@#$1234Deepu");
+		Exception excp = assertThrows(ValidationException.class , ()->{
+			us.createUser(user);
+		});
+		String m1 = "last name should contain only alphabets not numbers and symbols";
 		String m2 = excp.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -151,7 +190,7 @@ public class TestUpdateUser {
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "age cannot be negative";
 		String m2 = excp.getMessage();
@@ -170,7 +209,7 @@ public class TestUpdateUser {
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "age must be atleast greater than or equal to 18";
 		String m2 = excp.getMessage();
@@ -189,7 +228,7 @@ public class TestUpdateUser {
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "invalid mobile number";
 		String m2 = excp.getMessage();
@@ -208,7 +247,7 @@ public class TestUpdateUser {
 		user.setPassword("Deepu*&*&1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "mobile number doesn't match the required format";
 		String m2 = excp.getMessage();
@@ -227,7 +266,7 @@ public class TestUpdateUser {
 		user.setPassword(null);
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "password cannot be null or empty";
 		String m2 = excp.getMessage();
@@ -246,7 +285,7 @@ public class TestUpdateUser {
 		user.setPassword("");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "password cannot be null or empty";
 		String m2 = excp.getMessage();
@@ -265,7 +304,7 @@ public class TestUpdateUser {
 		user.setPassword("deepika123");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.update(3, user);
+			us.updateUser(3, user);
 		});
 		String m1 = "Password doesn't match the required format";
 		String m2 = excp.getMessage();

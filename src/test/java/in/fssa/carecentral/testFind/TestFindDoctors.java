@@ -15,7 +15,7 @@ public class TestFindDoctors {
 	public void testFindDoctors() {
 		DoctorService ds = new DoctorService();
 		assertDoesNotThrow(()->{
-			ds.getAll();
+			ds.listAllDoctor();
 		});
 	}
 	
@@ -23,7 +23,7 @@ public class TestFindDoctors {
 	public void testFindDoctorByValidDoctorId() {
 		DoctorService ds = new DoctorService();
 		assertDoesNotThrow(()->{
-			ds.getById(1);
+			ds.getDoctorById(1);
 		});
 	}
 	
@@ -31,7 +31,7 @@ public class TestFindDoctors {
 	public void testFindDoctorByInvalidId() {
 		DoctorService ds = new DoctorService();
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.getById(-12);
+			ds.getDoctorById(-12);
 		});
 		
 		String m1 = "id cannot be negative";
@@ -43,7 +43,7 @@ public class TestFindDoctors {
 	public void testFindUserWithValidEmail() {
 		DoctorService us = new DoctorService();
 		assertDoesNotThrow(()->{
-			us.getByEmail("vani1967@gmail.com");
+			us.getDoctorByEmail("vani1967@gmail.com");
 		});
 	}
 	
@@ -51,7 +51,7 @@ public class TestFindDoctors {
 	public void testFindUserWithNullEmail() {
 		DoctorService us = new DoctorService();
 		Exception ex = assertThrows(ValidationException.class,()->{
-			us.getByEmail(null);
+			us.getDoctorByEmail(null);
 		});
 		String m1 = "email cannot be null or empty";
 		String m2 = ex.getMessage();

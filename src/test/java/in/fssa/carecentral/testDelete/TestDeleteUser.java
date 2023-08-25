@@ -16,7 +16,7 @@ public class TestDeleteUser {
 		UserService us = new UserService();
 		assertDoesNotThrow(()->{
 			UserService.reactivate(4);
-			us.delete(4);
+			us.deleteUser(4);
 			
 		});
 	}
@@ -26,7 +26,7 @@ public class TestDeleteUser {
 	public void testDeleteUserWithInvalidId() {
 		UserService us = new UserService();
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.delete(-45);
+			us.deleteUser(-45);
 		});
 		String m1 = "id cannot be negative";
 		String m2 = excp.getMessage();

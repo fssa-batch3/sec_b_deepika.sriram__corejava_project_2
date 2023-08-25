@@ -7,7 +7,7 @@ import java.util.Set;
 import in.fssa.carecentral.service.*;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.dto.*;
-import in.fssa.carecentral.enumFiles.Gender;
+import in.fssa.carecentral.enumfiles.Gender;
 
 public class App {
 
@@ -55,7 +55,7 @@ public class App {
 //			ds.update(5, d);
 			
 //			System.out.println(ds.getAll());
-			System.out.println(ds.getByEmail("vani1967@gmail.com"));
+			System.out.println(ds.getDoctorByEmail("vani1967@gmail.com"));
 			
 			
 			

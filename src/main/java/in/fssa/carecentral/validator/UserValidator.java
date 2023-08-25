@@ -29,8 +29,8 @@ public class UserValidator {
 			throw new ValidationException("age must be atleast greater than or equal to 18");
 		}
 		
-		UserDAO userDao = new UserDAO();
-		User user1 = userDao.findByEmail(user.getEmailId());
+		UserDAO userDAO = new UserDAO();
+		User user1 = userDAO.findByEmail(user.getEmailId());
 		if(user1!=null) {
 			throw new ValidationException("User already exists");
 		}
@@ -40,6 +40,18 @@ public class UserValidator {
 		StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
 		StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
 		
+		Pattern pattern1 = Pattern.compile("^[A-Za-z\\s'-]+$");
+		Matcher matcher1 = pattern1.matcher(user.getFirstName());
+		if(matcher1.matches()==false) {
+			throw new ValidationException("first name should contain only alphabets not numbers and symbols");
+		}
+		
+		Pattern pattern2 =  Pattern.compile("^[A-Za-z\\s'-]+$");
+		Matcher matcher2 = pattern2.matcher(user.getLastName());
+		if(matcher2.matches()==false) {
+			throw new ValidationException("last name should contain only alphabets not numbers and symbols");
+		}
+		
 		if(user.getMobileNumber()<=0) {
 			throw new ValidationException("invalid mobile number");
 		}
@@ -48,9 +60,9 @@ public class UserValidator {
 			throw new ValidationException("mobile number doesn't match the required format");
 		}
 		
-		Pattern ptn2 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-		Matcher mtch2 = ptn2.matcher(user.getEmailId());
-		if(mtch2.matches()==false) {
+		Pattern pattern3 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+		Matcher matcher3 = pattern3.matcher(user.getEmailId());
+		if(matcher3.matches()==false) {
 			throw new ValidationException("email doesn't match the required format");
 		}
 		
@@ -86,8 +98,8 @@ public class UserValidator {
 			throw new ValidationException("age must be atleast greater than or equal to 18");
 		}
 		
-		UserDAO userDao = new UserDAO();
-		User user1 = userDao.findById(id);
+		UserDAO userDAO = new UserDAO();
+		User user1 = userDAO.findById(id);
 		if(user1==null) {
 			throw new ValidationException("User doesn't exists");
 		}
@@ -95,6 +107,18 @@ public class UserValidator {
 		StringUtil.rejectIfInvalidString(user.getPassword(), "password");
 		StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
 		StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
+		
+		Pattern pattern1 = Pattern.compile("^[A-Za-z\\s'-]+$");
+		Matcher matcher1 = pattern1.matcher(user.getFirstName());
+		if(matcher1.matches()==false) {
+			throw new ValidationException("first name should contain only alphabets not numbers and symbols");
+		}
+		
+		Pattern pattern2 =  Pattern.compile("^[A-Za-z\\s'-]+$");
+		Matcher matcher2 = pattern2.matcher(user.getLastName());
+		if(matcher2.matches()==false) {
+			throw new ValidationException("last name should contain only alphabets not numbers and symbols");
+		}
 		
 		
 		if(user.getMobileNumber()<=0) {
@@ -124,8 +148,8 @@ public class UserValidator {
 		if(id <=0) {
 			throw new ValidationException("id cannot be negative");
 		}
-		UserDAO userDao = new UserDAO();
-		User user1 = userDao.findById(id);
+		UserDAO userDAO = new UserDAO();
+		User user1 = userDAO.findById(id);
 		if(user1==null) {
 			throw new ValidationException("User doesn't exists");
 		}
@@ -141,9 +165,9 @@ public class UserValidator {
 	public static void validateForEmail(String email) throws ValidationException{
 		StringUtil.rejectIfInvalidString(email, "email");
 		
-		Pattern ptn2 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-		Matcher mtch2 = ptn2.matcher(email);
-		if(mtch2.matches()==false) {
+		Pattern pattern1 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+		Matcher matcher1 = pattern1.matcher(email);
+		if(matcher1.matches()==false) {
 			throw new ValidationException("email doesn't match the required format");
 		}
 	}

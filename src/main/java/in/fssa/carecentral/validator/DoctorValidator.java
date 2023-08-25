@@ -22,8 +22,8 @@ public class DoctorValidator extends UserValidator{
 			throw new ValidationException("id cannot be negative");
 		}
 		
-		DoctorDAO ddao = new DoctorDAO();
-		Doctor doctor = ddao.findById(id);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		Doctor doctor = doctorDAO.findById(id);
 		if(doctor == null) {
 			throw new ValidationException("Doctor doesn't exists");
 		}
@@ -73,8 +73,8 @@ public class DoctorValidator extends UserValidator{
 		if(id<=0) {
 			throw new ValidationException("id cannot be negative");
 		}
-		DoctorDAO ddao = new DoctorDAO();
-		Doctor doctor = ddao.findById(id);
+		DoctorDAO doctorDAO = new DoctorDAO();
+		Doctor doctor = doctorDAO.findById(id);
 		if(doctor == null) {
 			throw new ValidationException("Doctor doesn't exists");
 		}

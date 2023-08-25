@@ -1,6 +1,6 @@
 package in.fssa.carecentral.dto;
 
-import in.fssa.carecentral.enumFiles.Gender;
+import in.fssa.carecentral.enumfiles.Gender;
 
 public class DoctorDTO {
 	private int id;

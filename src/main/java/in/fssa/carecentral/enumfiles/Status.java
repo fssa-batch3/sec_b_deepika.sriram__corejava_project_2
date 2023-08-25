@@ -1,4 +1,4 @@
-package in.fssa.carecentral.enumFiles;
+package in.fssa.carecentral.enumfiles;
 
 public enum Status {
 	Approved,

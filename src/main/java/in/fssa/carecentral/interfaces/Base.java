@@ -1,4 +1,4 @@
-package in.fssa.carecentral.interface_files;
+package in.fssa.carecentral.interfaces;
 
 import java.util.Set;
 
