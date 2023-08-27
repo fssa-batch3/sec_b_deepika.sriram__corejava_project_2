@@ -108,7 +108,7 @@ public class DoctorService {
 	 * @return doctor detail
 	 * @throws ValidationException
 	 */
-	public DoctorDTO getDoctorById(int id) throws ValidationException {
+	public static DoctorDTO getDoctorById(int id) throws ValidationException {
 		DoctorValidator.validateForDoctorId(id);
 		DoctorDAO doctorDAO = new DoctorDAO();
 		return doctorDAO.findDoctorById(id);

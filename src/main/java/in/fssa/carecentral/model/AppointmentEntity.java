@@ -13,6 +13,7 @@ public abstract class AppointmentEntity {
 	private String startTime;
 	private String endTime;
 	private Status status;
+	private String reasonForRejection;
 	
 	
 	public int getId() {
@@ -70,16 +71,19 @@ public abstract class AppointmentEntity {
 		this.status = status;
 	}
 	
+	public String getReasonForRejection() {
+		return reasonForRejection;
+	}
+	public void setReasonForRejection(String reasonForRejection) {
+		this.reasonForRejection = reasonForRejection;
+	}
 	@Override
 	public String toString() {
-		return "\n [id=" + id + ", patientId=" + patientId + ", doctorId=" + doctorId
+		return "AppointmentEntity [id=" + id + ", patientId=" + patientId + ", doctorId=" + doctorId
 				+ ", reasonForConsultation=" + reasonForConsultation + ", methodOfConsultation=" + methodOfConsultation
 				+ ", dateOfConsultation=" + dateOfConsultation + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", reasonForRejection=" + reasonForRejection + "]";
 	}
-	
-	
-	
 	
 	
 }

@@ -15,4 +15,10 @@ public class StringUtil {
 			throw new ValidationException(inputName.concat(" cannot be null or empty"));
 		}
 	}
+	
+	public static void rejectIfInvalidInteger(int input , String inputName) throws ValidationException {
+		if(input<=0) {
+			throw new ValidationException(inputName.concat(" cannot be negative"));
+		}
+	}
 }
