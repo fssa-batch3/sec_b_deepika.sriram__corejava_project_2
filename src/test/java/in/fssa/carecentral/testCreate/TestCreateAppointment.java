@@ -23,7 +23,7 @@ public class TestCreateAppointment {
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
 		appointment.setDoctorId(10);
-		appointment.setReasonForConsultation("Stomach ache for 3 days");
+		appointment.setReasonForConsultation("head ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(random.nextLong(7)));
 		appointment.setDateOfConsultation(date);
@@ -53,7 +53,7 @@ public class TestCreateAppointment {
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(-5);
 		appointment.setDoctorId(10);
-		appointment.setReasonForConsultation("Stomach ache for 3 days");
+		appointment.setReasonForConsultation("head ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-06");
 		appointment.setStartTime("12:00:00");
