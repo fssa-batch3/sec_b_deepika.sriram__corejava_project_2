@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import in.fssa.carecentral.enumfiles.MethodOfConsultation;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.Appointment;
 import in.fssa.carecentral.service.AppointmentService;
+import in.fssa.carecentral.util.RandomTimeGenerator;
 
 public class TestCreateAppointment {
 
@@ -27,8 +29,12 @@ public class TestCreateAppointment {
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(random.nextLong(7)));
 		appointment.setDateOfConsultation(date);
-		appointment.setStartTime("12:00:00");
-		appointment.setEndTime("13:00:00");
+		LocalTime time = RandomTimeGenerator.generateTime();
+		String startTime = AppointmentService.convertLocalTimeToString(time);
+		String endTime = AppointmentService.convertLocalTimeToString(time.plusHours(1));
+		appointment.setStartTime(startTime);
+		appointment.setEndTime(endTime);
+		System.out.println(startTime+" "+endTime);
 		
 		assertDoesNotThrow(()->{
 			appointmentService.create(appointment);

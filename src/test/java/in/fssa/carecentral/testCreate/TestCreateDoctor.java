@@ -29,6 +29,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS , MS-Obstetrics and gynecologist");
 		ddto.setExperience(10);
 		ddto.setDepartment("Obstetrician and Gynecologist");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		assertDoesNotThrow(()->{
 			ds.createDoctor(ddto);
@@ -63,6 +64,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -89,6 +91,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -113,6 +116,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -139,6 +143,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -164,6 +169,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -188,6 +194,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -214,6 +221,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -239,6 +247,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -264,6 +273,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -289,12 +299,13 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
 		});
 		
-		String m1 = "invalid mobile number";
+		String m1 = "mobile number should start from between 6 and 9";
 		String m2 = ex.getMessage();
 		System.out.println(m2);
 		assertTrue(m1.equals(m2));
@@ -315,6 +326,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -340,6 +352,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -365,12 +378,13 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
 		});
 		
-		String m1 = "email doesn't match the required format";
+		String m1 = "email must contain lowercase letters followed by '@' and '.'";
 		String m2 = ex.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -389,6 +403,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -413,6 +428,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -437,12 +453,13 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
 		});
 		
-		String m1 = "Password doesn't match the required format";
+		String m1 = "Password should contain the combination of uppercase , lowercase , numbers and symbols";
 		String m2 = ex.getMessage();
 		assertTrue(m1.equals(m2));
 		
@@ -462,6 +479,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications(null);
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -486,6 +504,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -510,6 +529,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment(null);
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -534,7 +554,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("");
-		
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
 		});
@@ -558,6 +578,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(0);
 		ddto.setDepartment("General Medicine");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);
@@ -582,6 +603,7 @@ public class TestCreateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(5);
 		ddto.setDepartment("General Medicine");
+		ddto.setDoctorImage("https://iili.io/HU0MDbV.jpg");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.createDoctor(ddto);

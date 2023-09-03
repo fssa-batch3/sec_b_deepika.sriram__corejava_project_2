@@ -28,6 +28,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		assertDoesNotThrow(()->{
 			ds.updateDoctor(1, d);
 		});
@@ -61,6 +62,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(6, d);
 		});
@@ -82,6 +84,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(-1, d);
 		});
@@ -103,6 +106,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
 		});
@@ -124,6 +128,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
 		});
@@ -145,6 +150,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS , MS-Obstetrics and Gynecology");
 		d.setExperience(30);
 		d.setDepartment("Gynecologist");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
 		});
@@ -168,6 +174,7 @@ public class TestUpdateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, ddto);
@@ -192,6 +199,7 @@ public class TestUpdateDoctor {
 		ddto.setQualifications("MBBS");
 		ddto.setExperience(20);
 		ddto.setDepartment("General Physician");
+		ddto.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, ddto);
@@ -215,6 +223,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -237,6 +246,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -259,11 +269,12 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
 		});
-		String m1 = "mobile number doesn't match the required format";
+		String m1 = "mobile number should start from between 6 and 9";
 		String m2 = ex.getMessage();
 		System.out.println(m2);
 		assertTrue(m1.equals(m2));
@@ -282,6 +293,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -304,6 +316,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -326,11 +339,12 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
 		});
-		String m1 = "Password doesn't match the required format";
+		String m1 = "Password should contain the combination of uppercase , lowercase , numbers and symbols";
 		String m2 = ex.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -348,6 +362,7 @@ public class TestUpdateDoctor {
 		d.setQualifications(null);
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -370,6 +385,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("");
 		d.setExperience(20);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -392,6 +408,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(0);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -414,6 +431,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(7);
 		d.setDepartment("General Physician");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -436,6 +454,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(15);
 		d.setDepartment(null);
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);
@@ -458,6 +477,7 @@ public class TestUpdateDoctor {
 		d.setQualifications("MBBS");
 		d.setExperience(15);
 		d.setDepartment("");
+		d.setDoctorImage("https://iili.io/J99xK37.png");
 		
 		Exception ex = assertThrows(ValidationException.class , ()->{
 			ds.updateDoctor(1, d);

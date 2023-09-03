@@ -6,7 +6,6 @@ import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.validator.UserValidator;
 import in.fssa.carecentral.dao.*;
-import in.fssa.carecentral.dto.DoctorDTO;
 
 
 
@@ -17,7 +16,7 @@ public class UserService {
 	 * @return userId
 	 * @throws ValidationException
 	 */
-	public int createUser(User newUser) throws ValidationException{
+	public  int createUser(User newUser) throws ValidationException{
 		
 		UserValidator.validateForCreate(newUser);
 		

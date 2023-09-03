@@ -76,6 +76,7 @@ public class DoctorService {
 		 doctor.setQualifications( newDoctor.getQualifications() );
 		 doctor.setExperience(newDoctor.getExperience());
 		 doctor.setDepartment(newDoctor.getDepartment());
+		 doctor.setDoctorImage(newDoctor.getDoctorImage());
 		 
 		doctorDAO.update(id, doctor);
 	}
@@ -114,6 +115,7 @@ public class DoctorService {
 		return doctorDAO.findDoctorById(id);
 		
 	}
+	
 	
 	/**
 	 * 

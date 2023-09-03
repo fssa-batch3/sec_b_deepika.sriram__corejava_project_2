@@ -56,14 +56,14 @@ public class UserValidator {
 			throw new ValidationException("invalid mobile number");
 		}
 		
-		if(user.getMobileNumber()<6666666666l || user.getMobileNumber()>9999999999l) {
-			throw new ValidationException("mobile number doesn't match the required format");
+		if(user.getMobileNumber()<6000000000l || user.getMobileNumber()>9999999999l) {
+			throw new ValidationException("mobile number should start from between 6 and 9");
 		}
 		
 		Pattern pattern3 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
 		Matcher matcher3 = pattern3.matcher(user.getEmailId());
 		if(matcher3.matches()==false) {
-			throw new ValidationException("email doesn't match the required format");
+			throw new ValidationException("email must contain lowercase letters followed by '@' and '.'");
 		}
 		
 		String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^*&+=])(?=\\S+$).{8,}$";
@@ -71,7 +71,7 @@ public class UserValidator {
         Matcher matcher = compiledPattern.matcher(user.getPassword());
 
         if (!matcher.matches()) {
-            throw new ValidationException("Password doesn't match the required format");
+            throw new ValidationException("Password should contain the combination of uppercase , lowercase , numbers and symbols");
         }
 		
 		
@@ -125,7 +125,7 @@ public class UserValidator {
 			throw new ValidationException("invalid mobile number");
 		}
 		if(user.getMobileNumber()<6666666666l || user.getMobileNumber()>9999999999l) {
-			throw new ValidationException("mobile number doesn't match the required format");
+			throw new ValidationException("mobile number should start from between 6 and 9");
 		}
 		
 		
@@ -134,7 +134,7 @@ public class UserValidator {
         Matcher matcher = compiledPattern.matcher(user.getPassword());
 
         if (!matcher.matches()) {
-            throw new ValidationException("Password doesn't match the required format");
+            throw new ValidationException("Password should contain the combination of uppercase , lowercase , numbers and symbols");
         }
 	}
 	
@@ -168,7 +168,7 @@ public class UserValidator {
 		Pattern pattern1 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
 		Matcher matcher1 = pattern1.matcher(email);
 		if(matcher1.matches()==false) {
-			throw new ValidationException("email doesn't match the required format");
+			throw new ValidationException("email must contain lowercase letters followed by '@' and '.'");
 		}
 	}
 	

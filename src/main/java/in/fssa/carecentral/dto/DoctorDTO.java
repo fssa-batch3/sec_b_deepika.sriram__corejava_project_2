@@ -15,6 +15,7 @@ public class DoctorDTO {
 	private String qualifications;
 	private double experience;
 	private String department;
+	private String doctorImage;
 	private boolean isDocActive = true;
 	private int userId;
 	
@@ -108,6 +109,14 @@ public class DoctorDTO {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	public String getDoctorImage() {
+		return doctorImage;
+	}
+
+	public void setDoctorImage(String doctorImage) {
+		this.doctorImage = doctorImage;
+	}
+
 	public boolean isDocActive() {
 		return isDocActive;
 	}
@@ -133,7 +142,9 @@ public class DoctorDTO {
 		return "DoctorDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
 				+ ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", emailId=" + emailId + ", password="
 				+ password + ", isActive=" + isActive + ", qualifications=" + qualifications + ", experience="
-				+ experience + ", department=" + department + ", isDocActive=" + isDocActive + ", userId=" + userId
-				+ "]\n";
+				+ experience + ", department=" + department + ", doctorImage=" + doctorImage + ", isDocActive="
+				+ isDocActive + ", userId=" + userId + "]";
 	}
+
+	
 }

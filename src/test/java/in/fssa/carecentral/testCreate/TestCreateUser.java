@@ -247,7 +247,7 @@ public class TestCreateUser {
 		Exception excp = assertThrows(ValidationException.class , () ->{
 			us.createUser(user);
 		});
-		String m1 = "mobile number doesn't match the required format";
+		String m1 = "mobile number should start from between 6 and 9";
 		String m2 = excp.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -308,7 +308,7 @@ public class TestCreateUser {
 		Exception excp = assertThrows(ValidationException.class , () ->{
 			us.createUser(user);
 		});
-		String m1 = "email doesn't match the required format";
+		String m1 = "email must contain lowercase letters followed by '@' and '.'";
 		String m2 = excp.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -391,7 +391,7 @@ public class TestCreateUser {
 		Exception excp = assertThrows(ValidationException.class , () ->{
 			us.createUser(user);
 		});
-		String m1 = "Password doesn't match the required format";
+		String m1 = "Password should contain the combination of uppercase , lowercase , numbers and symbols";
 		String m2 = excp.getMessage();
 		System.out.println(m2);
 		assertTrue(m1.equals(m2));

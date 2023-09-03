@@ -9,6 +9,7 @@ public abstract class DoctorEntity extends UserEntity{
 	private String qualifications;
 	private double experience;
 	private String department;
+	private String doctorImage;
 	private boolean isDocActive;
 	private int userId;
 	
@@ -30,6 +31,13 @@ public abstract class DoctorEntity extends UserEntity{
 	}
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+	public String getDoctorImage() {
+		return doctorImage;
+	}
+
+	public void setDoctorImage(String doctorImage) {
+		this.doctorImage = doctorImage;
 	}
 	public boolean isActive() {
 		return isDocActive;

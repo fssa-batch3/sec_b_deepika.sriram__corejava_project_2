@@ -28,7 +28,7 @@ public class TestUpdateUser {
 		user.setPassword("Praveen@2004");
 		
 		assertDoesNotThrow(() ->{
-			userService.updateUser(27, user);
+			userService.updateUser(5, user);
 			
 			
 		});
@@ -47,7 +47,7 @@ public class TestUpdateUser {
 		user.setPassword("SuJaThA@#1972");
 		
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			userService.updateUser(12, user);
+			userService.updateUser(0, user);
 		});
 		
 		String m1 = "User doesn't exists";
@@ -110,7 +110,7 @@ public class TestUpdateUser {
 		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("!@#$1234Deepu");
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.createUser(user);
+			us.updateUser(3,user);
 		});
 		String m1 = "first name should contain only alphabets not numbers and symbols";
 		String m2 = excp.getMessage();
@@ -171,7 +171,7 @@ public class TestUpdateUser {
 		user.setEmailId(EmailGenerator.generate());
 		user.setPassword("!@#$1234Deepu");
 		Exception excp = assertThrows(ValidationException.class , ()->{
-			us.createUser(user);
+			us.updateUser(3,user);
 		});
 		String m1 = "last name should contain only alphabets not numbers and symbols";
 		String m2 = excp.getMessage();
@@ -249,7 +249,7 @@ public class TestUpdateUser {
 		Exception excp = assertThrows(ValidationException.class , () ->{
 			us.updateUser(3, user);
 		});
-		String m1 = "mobile number doesn't match the required format";
+		String m1 = "mobile number should start from between 6 and 9";
 		String m2 = excp.getMessage();
 		assertTrue(m1.equals(m2));
 	}
@@ -306,7 +306,7 @@ public class TestUpdateUser {
 		Exception excp = assertThrows(ValidationException.class , () ->{
 			us.updateUser(3, user);
 		});
-		String m1 = "Password doesn't match the required format";
+		String m1 = "Password should contain the combination of uppercase , lowercase , numbers and symbols";
 		String m2 = excp.getMessage();
 		assertTrue(m1.equals(m2));
 	}

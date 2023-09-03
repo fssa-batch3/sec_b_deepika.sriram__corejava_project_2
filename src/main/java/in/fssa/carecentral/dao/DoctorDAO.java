@@ -28,12 +28,13 @@ public class DoctorDAO {
 		
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO doctors(user_id , qualifications , experience , department) VALUES (? , ? , ? , ?)";
+			String query = "INSERT INTO doctors(user_id , qualifications , experience , department , doctor_image) VALUES (? , ? , ? , ? , ?)";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			ps.setString(2, newDoctor.getQualifications());
 			ps.setDouble(3, DoctorService.convertYearToMonth(newDoctor.getExperience()));
 			ps.setString(4, newDoctor.getDepartment());
+			ps.setString(5, newDoctor.getDoctorImage());
 			
 			int rowsAffected = ps.executeUpdate();
 			if (rowsAffected > 0) {
@@ -63,7 +64,7 @@ public class DoctorDAO {
 		Set<DoctorDTO> doctorList =null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,first_name,last_name,age,gender,mobile_number,email_id FROM users as u INNER JOIN doctors AS d ON u.user_id = d.user_id WHERE d.is_active = 1";
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,doctor_image,first_name,last_name,age,gender,mobile_number,email_id FROM users as u INNER JOIN doctors AS d ON u.user_id = d.user_id WHERE d.is_active = 1";
 			ps = con.prepareStatement(query);
 			doctorList  = new HashSet<DoctorDTO>();
 			rs = ps.executeQuery();
@@ -80,6 +81,7 @@ public class DoctorDAO {
 				dto.setGender(Gender.valueOf(rs.getString("gender")));
 				dto.setMobileNumber(rs.getLong("mobile_number"));
 				dto.setEmailId(rs.getString("email_id"));
+				dto.setDoctorImage(rs.getString("doctor_image"));
 				doctorList.add(dto);
 			}
 			
@@ -105,12 +107,13 @@ public class DoctorDAO {
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE doctors SET qualifications = ? , experience = ? , department = ? WHERE doctor_id = ?";
+			String query = "UPDATE doctors SET qualifications = ? , experience = ? , department = ? , doctor_image = ? WHERE doctor_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, newDoctor.getQualifications());
 			ps.setDouble(2, DoctorService.convertYearToMonth(newDoctor.getExperience()));
 			ps.setString(3, newDoctor.getDepartment());
-			ps.setInt(4, id);
+			ps.setString(4, newDoctor.getDoctorImage());
+			ps.setInt(5, id);
 			int rowsAffected = ps.executeUpdate();
 			if (rowsAffected > 0) {
 				System.out.println("Doctor had been updated successfully");
@@ -166,7 +169,7 @@ public class DoctorDAO {
 		Doctor d = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT doctor_id,qualifications,experience,department,is_active,user_id FROM doctors WHERE is_active = 1 AND doctor_id = ?";
+			String query = "SELECT doctor_id,qualifications,experience,department,doctor_image,is_active,user_id FROM doctors WHERE is_active = 1 AND doctor_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -177,6 +180,7 @@ public class DoctorDAO {
 				d.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
 				d.setDepartment(rs.getString("department"));
 				d.setDocActive(rs.getBoolean("is_active"));
+				d.setDoctorImage(rs.getString("doctor_image"));
 				d.setUserId(rs.getInt("user_id"));
 			}
 		}catch (SQLException e) {
@@ -201,7 +205,7 @@ public class DoctorDAO {
 		DoctorDTO dd = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,first_name,last_name,age,gender,mobile_number,email_id,d.is_active FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND doctor_id = ?";
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,doctor_image,first_name,last_name,age,gender,mobile_number,email_id,d.is_active FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND doctor_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -218,6 +222,7 @@ public class DoctorDAO {
 				dd.setQualifications(rs.getString("qualifications"));
 				dd.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
 				dd.setDepartment(rs.getString("department"));
+				dd.setDoctorImage(rs.getString("doctor_image"));
 				dd.setDocActive(rs.getBoolean("d.is_active"));
 				
 			}
@@ -246,7 +251,7 @@ public class DoctorDAO {
 		DoctorDTO dd = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,first_name,last_name,age,gender,mobile_number,email_id FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND u.email_id = ?";
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,doctor_image,first_name,last_name,age,gender,mobile_number,email_id FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND u.email_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
@@ -264,6 +269,7 @@ public class DoctorDAO {
 				dd.setQualifications(rs.getString("qualifications"));
 				dd.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
 				dd.setDepartment(rs.getString("department"));
+				dd.setDoctorImage(rs.getString("doctor_image"));
 				dd.setDocActive(rs.getBoolean("d.is_active"));
 				
 			}
