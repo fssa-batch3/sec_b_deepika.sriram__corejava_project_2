@@ -101,4 +101,25 @@ public class UserService {
 		UserDAO userDAO = new UserDAO();
 		return userDAO.findByEmail(email);
 	}
+	
+	/**
+	 * 
+	 * @param newEmail
+	 * @param newPassword
+	 * @return boolean
+	 */
+//	public  boolean isRegistered(String newEmail , String newPassword){
+//		User user = new UserDAO().findByEmail(newEmail);
+//		System.out.println(user.toString());
+//		String password = user.getPassword();
+//		System.out.println("Actual password"+password);
+//		if(newPassword.equals(password)==false) {
+//			return false;
+//		}
+//		else {
+//			return true;
+//		}
+//		
+//	}
+	
 }
