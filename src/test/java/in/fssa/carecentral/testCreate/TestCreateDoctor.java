@@ -293,7 +293,7 @@ public class TestCreateDoctor {
 		ddto.setLastName("Ramamorthy");
 		ddto.setAge(44);
 		ddto.setGender(Gender.F);
-		ddto.setMobileNumber(0);
+		ddto.setMobileNumber(5643210987l);
 		ddto.setEmailId(EmailGenerator.generate());
 		ddto.setPassword("NiThYa*$%1234");
 		ddto.setQualifications("MBBS");

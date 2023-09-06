@@ -24,14 +24,15 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(2);
 		appointment.setReasonForConsultation("head ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(random.nextLong(7)));
 		appointment.setDateOfConsultation(date);
-		LocalTime time = RandomTimeGenerator.generateTime();
-		String startTime = AppointmentService.convertLocalTimeToString(time);
-		String endTime = AppointmentService.convertLocalTimeToString(time.plusHours(1));
+		LocalTime st = LocalTime.of(15, 0, 0);
+		LocalTime et = st.plusHours(1);
+		String startTime = AppointmentService.convertLocalTimeToString(st);
+		String endTime = AppointmentService.convertLocalTimeToString(et);
 		appointment.setStartTime(startTime);
 		appointment.setEndTime(endTime);
 		System.out.println(startTime+" "+endTime);
@@ -77,8 +78,8 @@ public class TestCreateAppointment {
 	public void testCreateAppointmentWithInvalidPatientId() {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
-		appointment.setPatientId(4);
-		appointment.setDoctorId(10);
+		appointment.setPatientId(30);
+		appointment.setDoctorId(5);
 		appointment.setReasonForConsultation("Stomach ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-06");
@@ -119,7 +120,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(8);
+		appointment.setDoctorId(15);
 		appointment.setReasonForConsultation("Stomach ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-06");
@@ -140,7 +141,7 @@ public class TestCreateAppointment {
 		Appointment appointment = new Appointment();
 		
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(5);
 		appointment.setReasonForConsultation(null);
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-10");
@@ -162,7 +163,7 @@ public class TestCreateAppointment {
 		Appointment appointment = new Appointment();
 		
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-10");
@@ -175,6 +176,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "reason for consultation cannot be null or empty";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
@@ -184,7 +186,7 @@ public class TestCreateAppointment {
 		Appointment appointment = new Appointment();
 		
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("asdfghjk12345678*&^%$#@");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-10");
@@ -205,7 +207,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(2);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation(null);
@@ -227,7 +229,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("");
@@ -262,6 +264,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "date should be in the format of 'yyyy-MM-dd'";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 		
 	}
@@ -271,7 +274,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().minusDays(3));
@@ -293,7 +296,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-09");
@@ -314,7 +317,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-09");
@@ -335,7 +338,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-09");
@@ -377,7 +380,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-02");
@@ -390,6 +393,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "end time should not be empty";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
@@ -398,7 +402,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-02");
@@ -411,6 +415,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "end time should not be empty";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
@@ -419,12 +424,12 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
-		appointment.setDateOfConsultation("2023-09-08");
-		appointment.setStartTime("10:30:00");
-		appointment.setEndTime("11:30:00");
+		appointment.setDateOfConsultation("2023-09-10");
+		appointment.setStartTime("09:30:00");
+		appointment.setEndTime("10:30:00");
 		
 		Exception exception = assertThrows(ValidationException.class,()->{
 			appointmentService.create(appointment);
@@ -432,6 +437,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "appointment already exists in this timings";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
@@ -440,7 +446,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-05");
@@ -453,6 +459,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "you can only book appointment for 1 hr";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	

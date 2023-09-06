@@ -22,7 +22,7 @@ public class TestUpdateAppointment {
 		
 		
 		assertDoesNotThrow(()->{
-			appointmentService.updateAppointmentStatusByAppointmentId(11, appointment);
+			appointmentService.updateAppointmentStatusByAppointmentId(3, appointment);
 		});
 	}
 	
@@ -33,7 +33,7 @@ public class TestUpdateAppointment {
 		
 		appointment.setStatus(Status.Rejected);
 		Exception exception = assertThrows(ValidationException.class,()->{
-			appointmentService.updateAppointmentStatusByAppointmentId(11, appointment);
+			appointmentService.updateAppointmentStatusByAppointmentId(5, appointment);
 		});
 		
 		String expectedMessage = "status is already in Rejected";

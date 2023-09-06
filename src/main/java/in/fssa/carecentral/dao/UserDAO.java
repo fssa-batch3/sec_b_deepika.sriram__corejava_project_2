@@ -278,7 +278,7 @@ public class UserDAO implements UserInterface {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			if (e.getMessage().contains("Duplicate entry")) {
+			if (e.getMessage().contains("Duplicate entry '"+user.getEmailId()+"' for key 'users.email_id'")) {
 				throw new RuntimeException("User already exists");
 			}
 		} finally {

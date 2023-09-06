@@ -86,6 +86,8 @@ public class AppointmentDAO implements AppointmentInterface{
 			LocalDate localDate = AppointmentService.convertStringToDate(app.getDateOfConsultation());
 			
 			java.sql.Date date = Date.valueOf(localDate);
+			System.out.println(date);
+			System.out.println(localDate);
 			
 			Timestamp startTime = Timestamp.valueOf((localDate+" "+app.getStartTime()));
 			
@@ -179,7 +181,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		AppointmentDTO appointment = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE patient_id = ?";
+			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE patient_id = ? ORDER BY date_of_consultation ASC";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, userId);
 			rs = ps.executeQuery();
