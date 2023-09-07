@@ -64,7 +64,7 @@ public class TestUpdateDoctor {
 		d.setDepartment("Gynecologist");
 		d.setDoctorImage("https://iili.io/J99xK37.png");
 		Exception ex = assertThrows(ValidationException.class , ()->{
-			ds.updateDoctor(6, d);
+			ds.updateDoctor(16, d);
 		});
 		String m1 = "Doctor doesn't exists";
 		String m2 = ex.getMessage();

@@ -15,9 +15,9 @@ public class TestDeleteDoctor {
 	@Test
 	public void testDeleteDoctorWithValidId() {
 		DoctorService ds = new DoctorService();
-		DoctorService.reactivate(8);
+		DoctorService.reactivate(4);
 		assertDoesNotThrow(()->{
-			ds.deleteDoctor(8);
+			ds.deleteDoctor(4);
 		});
 	}
 	

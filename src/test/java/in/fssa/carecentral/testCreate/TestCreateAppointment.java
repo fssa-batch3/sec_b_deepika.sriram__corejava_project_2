@@ -29,7 +29,7 @@ public class TestCreateAppointment {
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(random.nextLong(7)));
 		appointment.setDateOfConsultation(date);
-		LocalTime st = LocalTime.of(15, 0, 0);
+		LocalTime st = LocalTime.of(12, 00, 0);
 		LocalTime et = st.plusHours(1);
 		String startTime = AppointmentService.convertLocalTimeToString(st);
 		String endTime = AppointmentService.convertLocalTimeToString(et);
@@ -251,7 +251,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("09-09-2023");
@@ -359,7 +359,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(10);
+		appointment.setDoctorId(2);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		appointment.setDateOfConsultation("2023-09-08");
@@ -383,7 +383,7 @@ public class TestCreateAppointment {
 		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
-		appointment.setDateOfConsultation("2023-09-02");
+		appointment.setDateOfConsultation("2023-09-12");
 		appointment.setStartTime("09:45:00");
 		appointment.setEndTime(null);
 		
@@ -405,7 +405,7 @@ public class TestCreateAppointment {
 		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
-		appointment.setDateOfConsultation("2023-09-02");
+		appointment.setDateOfConsultation("2023-09-13");
 		appointment.setStartTime("09:45:00");
 		appointment.setEndTime("");
 		
@@ -449,7 +449,7 @@ public class TestCreateAppointment {
 		appointment.setDoctorId(3);
 		appointment.setReasonForConsultation("eye pain since day before yesterday");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
-		appointment.setDateOfConsultation("2023-09-05");
+		appointment.setDateOfConsultation("2023-09-12");
 		appointment.setStartTime("14:30:00");
 		appointment.setEndTime("17:00:00");
 		

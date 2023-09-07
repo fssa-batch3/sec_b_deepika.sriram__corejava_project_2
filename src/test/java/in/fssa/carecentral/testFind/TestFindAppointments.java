@@ -15,11 +15,11 @@ public class TestFindAppointments {
 	public void testFindAppointmentWithValidDoctorId() {
 		AppointmentService appointmentService = new AppointmentService();
 		assertDoesNotThrow(()->{
-			System.out.println(appointmentService.getAllAppointmentsByDoctorId(8));
+			System.out.println(appointmentService.getAllAppointmentsByDoctorId(2));
 		});
 	}
 	
-	@Test
+	@Test 
 	public void testFindAppointmentWithValidPatientId() {
 		AppointmentService appointmentService = new AppointmentService();
 		assertDoesNotThrow(()->{
@@ -51,7 +51,7 @@ public class TestFindAppointments {
 	public void testFindAppointmentByInvalidUserId() {
 		AppointmentService appointmentService = new AppointmentService();
 		Exception exception = assertThrows(ValidationException.class,()->{
-			appointmentService.getAllAppointmentsByUserId(4);
+			appointmentService.getAllAppointmentsByUserId(20);
 		});
 		String expectedMessage = "User doesn't exists";
 		String actualMessage = exception.getMessage();

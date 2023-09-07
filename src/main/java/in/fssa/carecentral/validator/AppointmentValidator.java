@@ -179,15 +179,15 @@ public class AppointmentValidator {
 			throw new ValidationException("no appointment exist to update");
 		}
 		
-		String status = app.getStatus().name();
+		String status = app.getStatus().name(); 
 		if(status.equals(appointment.getStatus().name())){
 			throw new ValidationException("status is already in ".concat(status));
 		}
 		
-		Pattern pattern = Pattern.compile("^[a-zA-Z0-9,\\.\\s]+$");
-		Matcher matcher =  pattern.matcher(appointment.getReasonForRejection());
-		if(matcher.matches()==false) {
-			throw new ValidationException("reason should not include any special symbols");
-		}
+//		Pattern pattern = Pattern.compile("^[a-zA-Z0-9,\\.\\s]+$");
+//		Matcher matcher =  pattern.matcher(appointment.getReasonForRejection());
+//		if(matcher.matches()==false) {
+//			throw new ValidationException("reason should not include any special symbols");
+//		}
 	}
 }

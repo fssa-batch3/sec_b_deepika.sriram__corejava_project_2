@@ -20,12 +20,8 @@ public class ConnectionUtil {
 
             url = System.getenv("DATABASE_HOSTNAME");
             userName = System.getenv("DATABASE_USERNAME");
-            passWord = System.getenv("DATABASE_PASSWORD");
-//        	url = "jdbc:mysql://164.52.216.41/deepika_sriram_corejava_project";
-//        	userName = "fdHWJu06zCpv";
-//        	passWord = "b4e28e96-88ce-4330-b18d-b524d3d295f2";
-        	
-        
+            passWord = System.getenv("DATABASE_PASSWORD"); 
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url,userName,passWord);

@@ -70,7 +70,7 @@ public class AppointmentService {
 	public  Set<AppointmentDTO> getAllAppointmentsByUserId(int userId) throws ValidationException{
 		AppointmentValidator.validateExistenceOfUser(userId);
 		AppointmentDAO appointmentDAO = new AppointmentDAO();
-		return appointmentDAO.findAllAppointmentByUserId(userId);
+		return appointmentDAO.findAllAppointmentByUserId(userId); 
 	}
 	
 	public  void updateAppointmentStatusByAppointmentId(int id , Appointment appointment) throws ValidationException {

@@ -18,7 +18,7 @@ public class TestCreateUser {
 	public void testCreateUserWithValidData() {
 		UserService userService = new UserService();
 		User user = new User();
-		
+		 
 		user.setFirstName("Sujatha");
 		user.setLastName("Sriram");
 		user.setAge(51);
@@ -317,13 +317,13 @@ public class TestCreateUser {
 	public void testCreateUserWithExistingEmail() {
 		UserService us = new UserService();
 		User user = new User();
-		user.setFirstName("Vignesh");
-		user.setLastName("Ram");
+		user.setFirstName("Deepika");
+		user.setLastName("Sriram");
 		user.setAge(18);
 		user.setGender(Gender.F);
 		user.setMobileNumber(7397314532l);
-		user.setEmailId("sivavicky@gmail.com");
-		user.setPassword("Vicky**1234");
+		user.setEmailId("deepika@gmail.com");
+		user.setPassword("Deepika@1234");
 		
 		Exception excp = assertThrows(ValidationException.class , () ->{
 			us.createUser(user);

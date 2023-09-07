@@ -59,7 +59,7 @@ public class DoctorValidator extends UserValidator{
 			throw new ValidationException("Doctor should have atleast 10 yrs of experience");
 		}
 		StringUtil.rejectIfInvalidString(newDoctor.getDepartment(), "department");
-	}
+	} 
 	
 	
 	

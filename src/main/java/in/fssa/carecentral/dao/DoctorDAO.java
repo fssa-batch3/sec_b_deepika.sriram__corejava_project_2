@@ -24,7 +24,7 @@ public class DoctorDAO {
 	 */
 	public void create(DoctorDTO newDoctor , int id) {
 		Connection con = null;
-		PreparedStatement ps = null;
+		PreparedStatement ps = null; 
 		
 		try {
 			con = ConnectionUtil.getConnection();
@@ -149,7 +149,7 @@ public class DoctorDAO {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
+			
 			throw new RuntimeException(e);
 		} finally {
 			ConnectionUtil.close(con, ps);
@@ -157,6 +157,7 @@ public class DoctorDAO {
 		
 	}
 
+	
 	/**
 	 *  
 	 * @param id

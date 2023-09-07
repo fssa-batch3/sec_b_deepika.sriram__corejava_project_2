@@ -73,7 +73,7 @@ public class UserDAO implements UserInterface {
 			con = ConnectionUtil.getConnection();
 			String query = "INSERT INTO users (first_name , last_name , age , gender , mobile_number , email_id , password) "
 					+ "VALUES(? , ? , ? , ? , ? , ? , ?)";
-			ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS); 
 			ps.setString(1, newUser.getFirstName());
 			ps.setString(2, newUser.getLastName());
 			ps.setInt(3, newUser.getAge());
@@ -96,7 +96,7 @@ public class UserDAO implements UserInterface {
 
 			
 			newUser.setId(generatedId);
-
+ 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

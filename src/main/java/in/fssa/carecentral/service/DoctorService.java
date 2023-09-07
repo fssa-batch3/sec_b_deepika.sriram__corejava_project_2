@@ -18,7 +18,7 @@ public class DoctorService {
 		UserService userService = new UserService();
 		
 		
-		DoctorValidator.validate(newDoctor);
+		DoctorValidator.validate(newDoctor); 
 		User user = new User();
 		user.setFirstName(newDoctor.getFirstName());
 		user.setLastName(newDoctor.getLastName());

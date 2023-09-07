@@ -22,11 +22,11 @@ public class TestUpdateAppointment {
 		
 		
 		assertDoesNotThrow(()->{
-			appointmentService.updateAppointmentStatusByAppointmentId(3, appointment);
+			appointmentService.updateAppointmentStatusByAppointmentId(1, appointment); 
 		});
 	}
 	
-	@Test
+	@Test 
 	public void testUpdateAppointmentWithSameStatusInStatusField() {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
