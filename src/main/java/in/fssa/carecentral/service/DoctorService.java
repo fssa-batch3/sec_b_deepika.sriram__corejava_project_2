@@ -116,6 +116,16 @@ public class DoctorService {
 		
 	}
 	
+	public static DoctorDTO getDoctorIdByUserId(int id) {
+		try {
+			User user = UserService.getUserById(id);
+		} catch (ValidationException e) {
+			e.printStackTrace();
+		}
+		DoctorDAO doctorDAO = new DoctorDAO();
+		DoctorDTO doctor = doctorDAO.findDoctorIdByUserId(id);
+		return doctor;
+	}
 	
 	/**
 	 * 

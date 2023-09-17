@@ -10,6 +10,7 @@ public abstract class AppointmentEntity {
 	private String reasonForConsultation;
 	private MethodOfConsultation methodOfConsultation;
 	private String dateOfConsultation;
+	private String dateOfBooking;
 	private String startTime;
 	private String endTime;
 	private Status status;
@@ -51,6 +52,12 @@ public abstract class AppointmentEntity {
 	}
 	public void setDateOfConsultation(String dateOfConsultation) {
 		this.dateOfConsultation = dateOfConsultation;
+	}
+	public String getDateOfBooking() {
+		return dateOfBooking;
+	}
+	public void setDateOfBooking(String dateOfBooking) {
+		this.dateOfBooking = dateOfBooking;
 	}
 	public String getStartTime() {
 		return startTime;

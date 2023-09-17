@@ -16,6 +16,7 @@ public class AppointmentDTO {
 	private String reasonForConsultation;
 	private MethodOfConsultation methodOfConsultation;
 	private String dateOfConsultation;
+	private String dateOfBooking;
 	private String startTime;
 	private String endTime;
 	private Status status;
@@ -87,6 +88,12 @@ public class AppointmentDTO {
 	}
 	public void setDateOfConsultation(String dateOfConsultation) {
 		this.dateOfConsultation = dateOfConsultation;
+	}
+	public String getDateOfBooking() {
+		return dateOfBooking;
+	}
+	public void setDateOfBooking(String dateOfBooking) {
+		this.dateOfBooking = dateOfBooking;
 	}
 	public String getStartTime() {
 		return startTime;

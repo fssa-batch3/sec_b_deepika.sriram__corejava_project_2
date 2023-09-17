@@ -238,6 +238,45 @@ public class DoctorDAO {
 		return dd;
 	}
 	
+	public DoctorDTO findDoctorIdByUserId(int id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		DoctorDTO doctor = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,doctor_image,first_name,last_name,age,gender,mobile_number,email_id,d.is_active FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND user_id = ?";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				doctor = new DoctorDTO();
+				doctor.setId(rs.getInt("doctor_id"));
+				doctor.setUserId(rs.getInt("d.user_id"));
+				doctor.setFirstName(rs.getString("first_name"));
+				doctor.setLastName(rs.getString("last_name"));
+				doctor.setAge(rs.getInt("age"));
+				doctor.setGender(Gender.valueOf(rs.getString("gender")));
+				doctor.setMobileNumber(rs.getLong("mobile_number"));
+				doctor.setEmailId(rs.getString("email_id"));
+				doctor.setQualifications(rs.getString("qualifications"));
+				doctor.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
+				doctor.setDepartment(rs.getString("department"));
+				doctor.setDoctorImage(rs.getString("doctor_image"));
+				doctor.setDocActive(rs.getBoolean("d.is_active"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+		finally {
+			ConnectionUtil.close(con, ps, rs);
+		}
+		return doctor;
+		
+	}
+	
 	
 	/**
 	 * 
@@ -252,7 +291,7 @@ public class DoctorDAO {
 		DoctorDTO dd = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT doctor_id,d.user_id,qualifications,experience,department,doctor_image,first_name,last_name,age,gender,mobile_number,email_id FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND u.email_id = ?";
+			String query = "SELECT d.is_active,doctor_id,d.user_id,qualifications,experience,department,doctor_image,first_name,last_name,age,gender,mobile_number,email_id, password FROM users AS u INNER JOIN doctors AS d on u.user_id = d.user_id WHERE d.is_active = 1 AND u.email_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
