@@ -17,4 +17,5 @@ public interface AppointmentInterface {
 	public abstract AppointmentDTO findAppointmentByAppointmentId(int appId);
 	public abstract List<Map<String,LocalTime>>findAllBookedTimingsByDate(String date);
 	public abstract void createAppointment(Appointment app) throws ValidationException;
+	public abstract int countOfAppointmentsByDateAndDoctorId(int doctorId, String date);
 }

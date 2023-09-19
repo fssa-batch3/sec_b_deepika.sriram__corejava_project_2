@@ -45,7 +45,7 @@ public class AppointmentDAO implements AppointmentInterface{
 			LocalDate consultationdate = AppointmentService.convertStringToDate(date);
 			java.sql.Date sqlDate = Date.valueOf(consultationdate);
 			ps.setDate(1, sqlDate);
-			ps.setString(2, "On_process");
+			ps.setString(2, "Booked");
 			ps.setString(3, "Approved");
 			
 			rs = ps.executeQuery();
@@ -79,7 +79,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO appointments (doctor_id , patient_id , reason_for_consultation , method_of_consultation , date_of_consultation , start_time , end_time) VALUES(?,?,?,?,?,?,?)";
+			String query = "INSERT INTO appointments (doctor_id , patient_id , reason_for_consultation , method_of_consultation , date_of_consultation , start_time , end_time , status) VALUES(?,?,?,?,?,?,?,?)";
 			ps = con.prepareStatement(query);
 			
 			
@@ -101,6 +101,7 @@ public class AppointmentDAO implements AppointmentInterface{
 			ps.setDate(5, date);
 			ps.setTimestamp(6, startTime);
 			ps.setTimestamp(7, endTime);
+			ps.setString(8, app.getStatus().name());
 			
 			int rowsAffected =  ps.executeUpdate();
 			if(rowsAffected>0) {
@@ -295,6 +296,39 @@ public class AppointmentDAO implements AppointmentInterface{
 			ConnectionUtil.close(con, ps, rs);
 		}
 		return appointment;
+	}
+
+	@Override
+	public int countOfAppointmentsByDateAndDoctorId(int doctorId, String date) {
+		int count = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "SELECT COUNT(*) as total_count FROM appointments WHERE (status = 'Booked' OR status = 'Accepted') AND doctor_id = ? AND date_of_consultation = ?;";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, doctorId);
+			LocalDate localdate = AppointmentService.convertStringToDate(date);
+			java.sql.Date sqlDate = Date.valueOf(localdate);
+			ps.setDate(2, sqlDate);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("total_count");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println(e);
+			throw new RuntimeException(e);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		finally {
+			ConnectionUtil.close(con, ps, rs);
+		}
+		return count;
 	}
 
 

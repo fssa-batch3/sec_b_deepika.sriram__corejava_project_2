@@ -95,4 +95,11 @@ public class AppointmentService {
 		
 	}
 	
+	public static int getCountOfAppointmentsByDateAndDoctorId(int doctorId , String date) throws ValidationException {
+		AppointmentDAO appointmentDAO = new AppointmentDAO();
+		NumberUtil.rejectIfInvalidInteger(doctorId, "doctor id");
+		StringUtil.rejectIfInvalidString(date, "date of consultation");
+		return appointmentDAO.countOfAppointmentsByDateAndDoctorId(doctorId, date);
+	}
+	
 }

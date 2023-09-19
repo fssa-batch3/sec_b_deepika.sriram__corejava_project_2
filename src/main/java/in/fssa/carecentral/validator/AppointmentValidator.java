@@ -13,6 +13,7 @@ import in.fssa.carecentral.dao.UserDAO;
 import in.fssa.carecentral.dto.AppointmentDTO;
 import in.fssa.carecentral.dto.DoctorDTO;
 import in.fssa.carecentral.enumfiles.MethodOfConsultation;
+import in.fssa.carecentral.enumfiles.Status;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.Appointment;
 import in.fssa.carecentral.model.Doctor;
@@ -20,6 +21,7 @@ import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.service.AppointmentService;
 import in.fssa.carecentral.service.DoctorService;
 import in.fssa.carecentral.service.UserService;
+import in.fssa.carecentral.util.DateUtil;
 import in.fssa.carecentral.util.NumberUtil;
 import in.fssa.carecentral.util.StringUtil;
 
@@ -87,15 +89,7 @@ public class AppointmentValidator {
 		}
 		
 		// date of consultation validation
-		if(appointment.getDateOfConsultation()==null || "".equals(appointment.getDateOfConsultation())) {
-			throw new ValidationException("date of consultation should not be empty");
-		}
-		
-		Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-	    Matcher matcher = pattern.matcher(appointment.getDateOfConsultation());
-	    if(matcher.matches()==false){
-	      throw new ValidationException("date should be in the format of 'yyyy-MM-dd'");
-	    }
+		DateUtil.rejectIfInvalidDate(appointment.getDateOfConsultation(), "date");
 	    
 	    LocalDate date = LocalDate.parse(appointment.getDateOfConsultation());
 	    LocalDate currentDate = LocalDate.now();
@@ -146,6 +140,13 @@ public class AppointmentValidator {
 	    	throw new ValidationException("appointment already exists in this timings");
 	    }
 	    
+	    // minimum appointments validation
+	    int count = AppointmentService.getCountOfAppointmentsByDateAndDoctorId(appointment.getDoctorId(), appointment.getDateOfConsultation());
+	    if(count>30) {
+	    	appointment.setStatus(Status.Waiting_list);
+	    }else {
+	    	appointment.setStatus(Status.Booked);
+	    }
 	    
 	    
 	}

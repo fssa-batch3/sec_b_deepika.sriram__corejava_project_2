@@ -9,7 +9,6 @@ public abstract class UserEntity implements Comparable<UserEntity>{
 	private int age;
 	private Gender gender;
 	private long mobileNumber;
-	@NotNull
 	private String emailId;
 	
 	private String password;

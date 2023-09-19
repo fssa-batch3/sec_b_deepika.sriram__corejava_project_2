@@ -17,7 +17,7 @@ public class StringUtil {
 		if(input == null || "".equals(input.trim())) {
 			throw new ValidationException(inputName.concat(" cannot be null or empty"));
 		}
-	} 
+	}  
 	
 	public static void rejectIfIsNotAlphabetic(String input , String inputName) throws ValidationException {
 		Pattern pattern1 = Pattern.compile("^[A-Za-z\\s'-]+$");

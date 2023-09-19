@@ -70,4 +70,56 @@ public class TestFindAppointments {
 		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
+	
+	@Test
+	public void testFindCountOfAppointmentsByInvalidDoctorId() {
+		AppointmentService appointmentService = new AppointmentService();
+		Exception exception = assertThrows(ValidationException.class,()->{
+			appointmentService.getCountOfAppointmentsByDateAndDoctorId(0, "2023-09-18");
+		});
+		
+		String expectedMessage = "doctor id cannot be negative";
+		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	@Test
+	public void testFindCountOfAppointmentsByNullDate() {
+		AppointmentService appointmentService = new AppointmentService();
+		Exception exception = assertThrows(ValidationException.class,()->{
+			appointmentService.getCountOfAppointmentsByDateAndDoctorId(2, null);
+		});
+		
+		String expectedMessage = "date of consultation cannot be null or empty";
+		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	@Test
+	public void testFindCountOfAppointmentsByEmptyDate() {
+		AppointmentService appointmentService = new AppointmentService();
+		Exception exception = assertThrows(ValidationException.class,()->{
+			appointmentService.getCountOfAppointmentsByDateAndDoctorId(2, "");
+		});
+		
+		String expectedMessage = "date of consultation cannot be null or empty";
+		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
+	
+	@Test
+	public void testFindCountOfAppointmentsByIncorrectPatternOfDate() {
+		AppointmentService appointmentService = new AppointmentService();
+		Exception exception = assertThrows(ValidationException.class,()->{
+			appointmentService.getCountOfAppointmentsByDateAndDoctorId(2, "12-09-2023");
+		});
+		
+		String expectedMessage = "date should be in the format of 'yyyy-MM-dd'";
+		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
+		assertTrue(expectedMessage.equals(actualMessage));
+	}
 }
