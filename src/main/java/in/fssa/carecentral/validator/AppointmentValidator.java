@@ -20,6 +20,7 @@ import in.fssa.carecentral.model.User;
 import in.fssa.carecentral.service.AppointmentService;
 import in.fssa.carecentral.service.DoctorService;
 import in.fssa.carecentral.service.UserService;
+import in.fssa.carecentral.util.NumberUtil;
 import in.fssa.carecentral.util.StringUtil;
 
 public class AppointmentValidator {
@@ -60,8 +61,8 @@ public class AppointmentValidator {
 		}
 		
 		// id validation
-		StringUtil.rejectIfInvalidInteger(appointment.getDoctorId(), "doctor id");
-		StringUtil.rejectIfInvalidInteger(appointment.getPatientId(), "patient id");
+		NumberUtil.rejectIfInvalidInteger(appointment.getDoctorId(), "doctor id");
+		NumberUtil.rejectIfInvalidInteger(appointment.getPatientId(), "patient id");
 		
 		
 		// validation for existence of doctor and user
@@ -150,7 +151,7 @@ public class AppointmentValidator {
 	}
 	
 	public static void validateExistenceOfDoctor(int doctorId) throws ValidationException{
-		StringUtil.rejectIfInvalidInteger(doctorId, "doctor id");
+		NumberUtil.rejectIfInvalidInteger(doctorId, "doctor id");
 		try {
 			DoctorService.getDoctorById(doctorId);
 		}catch(ValidationException e) {
@@ -160,7 +161,7 @@ public class AppointmentValidator {
 	}
 	
 	public static void validateExistenceOfUser(int userId) throws ValidationException {
-		StringUtil.rejectIfInvalidInteger(userId, "user id");
+		NumberUtil.rejectIfInvalidInteger(userId, "user id");
 		try {
 			UserService.getUserById(userId);
 		}catch(ValidationException e) {
@@ -172,7 +173,7 @@ public class AppointmentValidator {
 		if(appointment==null) {
 			throw new ValidationException("appointment cannot be empty");
 		}
-		StringUtil.rejectIfInvalidInteger(id, "appointment id");
+		NumberUtil.rejectIfInvalidInteger(id, "appointment id");
 		AppointmentDTO app = AppointmentService.getAppointmentByAppointmentId(id);
 		
 		if(app==null) {

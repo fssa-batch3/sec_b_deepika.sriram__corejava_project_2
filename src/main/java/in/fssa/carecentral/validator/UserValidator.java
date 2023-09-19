@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import in.fssa.carecentral.dao.UserDAO;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.User;
+import in.fssa.carecentral.util.NumberUtil;
 import in.fssa.carecentral.util.StringUtil;
 
 public class UserValidator {
@@ -19,12 +20,14 @@ public class UserValidator {
 		if(user == null) {
 			throw new ValidationException("User cannot be null");
 		}
-		if(user.getId()<0) {
-			throw new ValidationException("id cannot be negative"); 
-		}
-		if(user.getAge()<0) {
-			throw new ValidationException("age cannot be negative");
-		}
+//		if(user.getId()<0) {
+//			throw new ValidationException("id cannot be negative"); 
+//		}
+//		if(user.getAge()<0) {
+//			throw new ValidationException("age cannot be negative");
+//		}
+		NumberUtil.rejectIfInvalidInteger(user.getId(), "id");
+		NumberUtil.rejectIfInvalidInteger(user.getAge(), "age");
 		if(user.getAge()<18) {
 			throw new ValidationException("age must be atleast greater than or equal to 18");
 		}
@@ -40,17 +43,8 @@ public class UserValidator {
 		StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
 		StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
 		
-		Pattern pattern1 = Pattern.compile("^[A-Za-z\\s'-]+$");
-		Matcher matcher1 = pattern1.matcher(user.getFirstName());
-		if(matcher1.matches()==false) {
-			throw new ValidationException("first name should contain only alphabets not numbers and symbols");
-		}
-		
-		Pattern pattern2 =  Pattern.compile("^[A-Za-z\\s'-]+$");
-		Matcher matcher2 = pattern2.matcher(user.getLastName());
-		if(matcher2.matches()==false) {
-			throw new ValidationException("last name should contain only alphabets not numbers and symbols");
-		}
+		StringUtil.rejectIfIsNotAlphabetic(user.getFirstName(), "first name");
+		StringUtil.rejectIfIsNotAlphabetic(user.getLastName(), "last name");
 		
 		if(user.getMobileNumber()<=0) {
 			throw new ValidationException("invalid mobile number");
@@ -88,12 +82,8 @@ public class UserValidator {
 		if(user == null) {
 			throw new ValidationException("user cannot be null or empty");
 		}
-		if(user.getId()<0) {
-			throw new ValidationException("id cannot be negative");
-		}
-		if(user.getAge()<0) {
-			throw new ValidationException("age cannot be negative");
-		}
+		NumberUtil.rejectIfInvalidInteger(id, "id");
+		NumberUtil.rejectIfInvalidInteger(user.getAge(), "age");
 		if(user.getAge()<18) {
 			throw new ValidationException("age must be atleast greater than or equal to 18");
 		}
@@ -108,17 +98,8 @@ public class UserValidator {
 		StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
 		StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
 		
-		Pattern pattern1 = Pattern.compile("^[A-Za-z\\s'-]+$");
-		Matcher matcher1 = pattern1.matcher(user.getFirstName());
-		if(matcher1.matches()==false) {
-			throw new ValidationException("first name should contain only alphabets not numbers and symbols");
-		}
-		
-		Pattern pattern2 =  Pattern.compile("^[A-Za-z\\s'-]+$");
-		Matcher matcher2 = pattern2.matcher(user.getLastName());
-		if(matcher2.matches()==false) {
-			throw new ValidationException("last name should contain only alphabets not numbers and symbols");
-		}
+		StringUtil.rejectIfIsNotAlphabetic(user.getFirstName(), "first name");
+		StringUtil.rejectIfIsNotAlphabetic(user.getLastName(), "last name");
 		
 		
 		if(user.getMobileNumber()<=0) {
@@ -145,9 +126,7 @@ public class UserValidator {
 	 * @throws ValidationException
 	 */
 	public static void validateForId(int id) throws ValidationException {
-		if(id <=0) {
-			throw new ValidationException("id cannot be negative");
-		}
+		NumberUtil.rejectIfInvalidInteger(id, "id");
 		UserDAO userDAO = new UserDAO();
 		User user1 = userDAO.findById(id);
 		if(user1==null) {

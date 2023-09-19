@@ -14,6 +14,7 @@ import in.fssa.carecentral.enumfiles.MethodOfConsultation;
 import in.fssa.carecentral.enumfiles.Status;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.Appointment;
+import in.fssa.carecentral.util.NumberUtil;
 import in.fssa.carecentral.util.StringUtil;
 import in.fssa.carecentral.validator.AppointmentValidator;
 
@@ -85,7 +86,7 @@ public class AppointmentService {
 	
 	public static AppointmentDTO getAppointmentByAppointmentId(int id) throws ValidationException {
 		AppointmentDAO appointmentDAO =  new AppointmentDAO();
-		StringUtil.rejectIfInvalidInteger(id, "id");
+		NumberUtil.rejectIfInvalidInteger(id, "id");
 		try {
 			return appointmentDAO.findAppointmentByAppointmentId(id);
 		}catch(RuntimeException e) {

@@ -1,4 +1,6 @@
 package in.fssa.carecentral.model;
+import javax.validation.constraints.NotNull;
+
 import in.fssa.carecentral.enumfiles.*;
 public abstract class UserEntity implements Comparable<UserEntity>{
 	private int id;
@@ -7,7 +9,9 @@ public abstract class UserEntity implements Comparable<UserEntity>{
 	private int age;
 	private Gender gender;
 	private long mobileNumber;
+	@NotNull
 	private String emailId;
+	
 	private String password;
 	private boolean isActive = true;
 	

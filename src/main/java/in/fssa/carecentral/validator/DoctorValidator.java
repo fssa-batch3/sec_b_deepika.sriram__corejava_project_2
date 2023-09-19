@@ -4,6 +4,7 @@ import in.fssa.carecentral.dao.DoctorDAO;
 import in.fssa.carecentral.dto.DoctorDTO;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.model.Doctor;
+import in.fssa.carecentral.util.NumberUtil;
 import in.fssa.carecentral.util.StringUtil;
 
 public class DoctorValidator extends UserValidator{
@@ -18,9 +19,7 @@ public class DoctorValidator extends UserValidator{
 		if(newdoctor == null) {
 			throw new ValidationException("Doctor cannot be null");
 		}
-		if(id<=0) {
-			throw new ValidationException("id cannot be negative");
-		}
+		NumberUtil.rejectIfInvalidInteger(id, "id");
 		
 		DoctorDAO doctorDAO = new DoctorDAO();
 		Doctor doctor = doctorDAO.findById(id);
@@ -70,9 +69,7 @@ public class DoctorValidator extends UserValidator{
 	 * @throws ValidationException
 	 */
 	public static void validateForDoctorId(int id) throws ValidationException {
-		if(id<=0) {
-			throw new ValidationException("id cannot be negative");
-		}
+		NumberUtil.rejectIfInvalidInteger(id, "id");
 		DoctorDAO doctorDAO = new DoctorDAO();
 		Doctor doctor = doctorDAO.findById(id);
 		if(doctor == null) {

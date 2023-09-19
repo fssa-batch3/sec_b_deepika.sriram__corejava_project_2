@@ -1,5 +1,8 @@
 package in.fssa.carecentral.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import in.fssa.carecentral.exception.ValidationException;
 
 public class StringUtil {
@@ -16,9 +19,11 @@ public class StringUtil {
 		}
 	} 
 	
-	public static void rejectIfInvalidInteger(int input , String inputName) throws ValidationException {
-		if(input<=0) {
-			throw new ValidationException(inputName.concat(" cannot be negative"));
+	public static void rejectIfIsNotAlphabetic(String input , String inputName) throws ValidationException {
+		Pattern pattern1 = Pattern.compile("^[A-Za-z\\s'-]+$");
+		Matcher matcher1 = pattern1.matcher(input);
+		if(matcher1.matches()==false) {
+			throw new ValidationException(inputName.concat(" should contain only alphabets not numbers and symbols"));
 		}
 	}
 }
