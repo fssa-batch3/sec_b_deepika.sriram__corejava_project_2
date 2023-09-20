@@ -128,21 +128,21 @@ public class AppointmentValidator {
 	    }
 	    
 	    LocalTime endingTime = LocalTime.parse(appointment.getEndTime());
-	    
-	    Duration duration = Duration.between(startingTime, endingTime);
-        long hoursDifference = duration.toHours();
-        if(hoursDifference>1) {
-        	throw new ValidationException("you can only book appointment for 1 hr");
-        }
+//	    
+//	    Duration duration = Duration.between(startingTime, endingTime);
+//        long hoursDifference = duration.toHours();
+//        if(hoursDifference>1) {
+//        	throw new ValidationException("you can only book appointment for 1 hr");
+//        }
         
-	    boolean endTimeExists = validateAppointmentAlreadyExists(endingTime,appointment.getDateOfConsultation());
-	    if(endTimeExists == true) {
-	    	throw new ValidationException("appointment already exists in this timings");
-	    }
+//	    boolean endTimeExists = validateAppointmentAlreadyExists(endingTime,appointment.getDateOfConsultation());
+//	    if(endTimeExists == true) {
+//	    	throw new ValidationException("appointment already exists in this timings");
+//	    }
 	    
 	    // minimum appointments validation
 	    int count = AppointmentService.getCountOfAppointmentsByDateAndDoctorId(appointment.getDoctorId(), appointment.getDateOfConsultation());
-	    if(count>30) {
+	    if(count>=5) {
 	    	appointment.setStatus(Status.Waiting_list);
 	    }else {
 	    	appointment.setStatus(Status.Booked);

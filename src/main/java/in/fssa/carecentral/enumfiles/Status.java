@@ -2,9 +2,9 @@ package in.fssa.carecentral.enumfiles;
 
 public enum Status {
 	Approved,
-	Rejected,
+	Cancelled_by_doctor,
+	Cancelled_by_patient,
 	Booked,
-	Consulted,
-	Cancelled,
-	Waiting_list
+	Waiting_list,
+	Consulted
 }

@@ -31,12 +31,12 @@ public class TestUpdateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		
-		appointment.setStatus(Status.Rejected);
+		appointment.setStatus(Status.Cancelled_by_doctor);
 		Exception exception = assertThrows(ValidationException.class,()->{
 			appointmentService.updateAppointmentStatusByAppointmentId(5, appointment);
 		});
 		
-		String expectedMessage = "status is already in Rejected";
+		String expectedMessage = "status is already Cancelled_by_doctor";
 		String actualMessage = exception.getMessage();
 		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));

@@ -44,7 +44,7 @@ public class AppointmentService {
 	}
 	
 	public static String convertLocalTimeToString(LocalTime time) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		String formattedTime = time.format(formatter);
 		return formattedTime;
 	}

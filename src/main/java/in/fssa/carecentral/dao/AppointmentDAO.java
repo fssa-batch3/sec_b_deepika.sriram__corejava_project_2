@@ -133,7 +133,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE  NOT status = 'Cancelled' AND doctor_id = ? ORDER BY date_of_consultation";
+			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE  NOT (status = 'Cancelled_by_patient' OR status = 'Waiting_list') AND doctor_id = ? ORDER BY date_of_consultation";
 			ps = con.prepareStatement(query); 
 			String doctorName = DoctorService.getDoctorById(doctorId).fullName(); 
 			ps.setInt(1, doctorId);
@@ -226,7 +226,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE appointments SET status = ? , reason_for_rejection_of_appointment = ? WHERE id = ? AND NOT (status = 'Rejected' OR status = 'Consulted') ";
+			String query = "UPDATE appointments SET status = ? , reason_for_rejection_of_appointment = ? WHERE id = ? AND NOT (status = 'Cancelled_by_doctor' OR status = 'Consulted') ";
 			ps = con.prepareStatement(query);
 			ps.setString(1, appointment.getStatus().name());
 			ps.setString(2, appointment.getReasonForRejection());
