@@ -13,6 +13,7 @@ import in.fssa.carecentral.enumfiles.*;
 import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.interfaces.UserInterface;
 import in.fssa.carecentral.util.ConnectionUtil;
+import in.fssa.carecentral.util.PasswordEncryptor;
 
 public class UserDAO implements UserInterface {
 	
@@ -80,7 +81,7 @@ public class UserDAO implements UserInterface {
 			ps.setString(4, newUser.getGender().name());
 			ps.setLong(5, newUser.getMobileNumber());
 			ps.setString(6, newUser.getEmailId());
-			ps.setString(7, newUser.getPassword());
+			ps.setString(7, PasswordEncryptor.encrypt(newUser.getPassword(), "ccntrl123@google"));
 
 			int rowsAffected = ps.executeUpdate();
 
@@ -101,6 +102,8 @@ public class UserDAO implements UserInterface {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(con, ps);
 		}
@@ -127,7 +130,7 @@ public class UserDAO implements UserInterface {
 			ps.setInt(3, newUser.getAge());
 			ps.setString(4, newUser.getGender().name());
 			ps.setLong(5, newUser.getMobileNumber());
-			ps.setString(6, newUser.getPassword());
+			ps.setString(6, PasswordEncryptor.encrypt(newUser.getPassword(), "ccntrl123@google"));
 			ps.setInt(7, id);
 			int rowsaffected = ps.executeUpdate();
 			if (rowsaffected>0) {
@@ -144,6 +147,8 @@ public class UserDAO implements UserInterface {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(con, ps);
 		}
@@ -272,7 +277,7 @@ public class UserDAO implements UserInterface {
 				user.setGender(Gender.valueOf(rs.getString("gender")));
 				user.setMobileNumber(rs.getLong("mobile_number"));
 				user.setEmailId(rs.getString("email_id"));
-				user.setPassword(rs.getString("password"));
+				user.setPassword(PasswordEncryptor.decrypt(rs.getString("password"), "ccntrl123@google"));
 				user.setActive(rs.getBoolean("is_active"));
 			}
 
@@ -281,6 +286,8 @@ public class UserDAO implements UserInterface {
 			if (e.getMessage().contains("Duplicate entry '"+user.getEmailId()+"' for key 'users.email_id'")) {
 				throw new RuntimeException("User already exists");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}

@@ -14,6 +14,7 @@ import in.fssa.carecentral.exception.ValidationException;
 import in.fssa.carecentral.service.DoctorService;
 import in.fssa.carecentral.service.UserService;
 import in.fssa.carecentral.util.ConnectionUtil;
+import in.fssa.carecentral.util.PasswordEncryptor;
 
 public class DoctorDAO {
 
@@ -305,7 +306,7 @@ public class DoctorDAO {
 				dd.setGender(Gender.valueOf(rs.getString("gender")));
 				dd.setMobileNumber(rs.getLong("mobile_number"));
 				dd.setEmailId(rs.getString("email_id"));
-				dd.setPassword(rs.getString("password"));
+				dd.setPassword(PasswordEncryptor.decrypt(rs.getString("password"), "ccntrl123@google"));
 				dd.setQualifications(rs.getString("qualifications"));
 				dd.setExperience(DoctorService.convertMonthToYear(rs.getInt("experience")));
 				dd.setDepartment(rs.getString("department"));
@@ -318,6 +319,9 @@ public class DoctorDAO {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
