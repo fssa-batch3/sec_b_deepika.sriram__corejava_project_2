@@ -142,6 +142,7 @@ public class AppointmentValidator {
 	    
 	    // minimum appointments validation
 	    int count = AppointmentService.getCountOfAppointmentsByDateAndDoctorId(appointment.getDoctorId(), appointment.getDateOfConsultation());
+	    System.out.println(count);
 	    if(count>=5) {
 	    	appointment.setStatus(Status.Waiting_list);
 	    }else {

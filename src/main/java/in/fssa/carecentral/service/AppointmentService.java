@@ -102,4 +102,17 @@ public class AppointmentService {
 		return appointmentDAO.countOfAppointmentsByDateAndDoctorId(doctorId, date);
 	}
 	
+	public  void changeAppointmentStatusByCancellingAnAppointment(int appId , Appointment appointment) throws ValidationException {
+		AppointmentDAO appointmentDAO = new AppointmentDAO();
+		NumberUtil.rejectIfInvalidInteger(appId, "appointment id");
+		
+		appointmentDAO.updateAppointmentStatus(appId, appointment);
+		List<Appointment> waitingListAppointments = appointmentDAO.findWaitingListAppointmentsByDoctorIdAndDate(appointment.getDoctorId(), appointment.getDateOfConsultation());
+		if(waitingListAppointments !=null && !waitingListAppointments.isEmpty()) {
+			Appointment updateAppointment = waitingListAppointments.get(0);
+			
+			appointmentDAO.changeWaitingListToBooked(updateAppointment.getId());
+		}
+	}
+	
 }

@@ -18,4 +18,6 @@ public interface AppointmentInterface {
 	public abstract List<Map<String,LocalTime>>findAllBookedTimingsByDate(String date);
 	public abstract void createAppointment(Appointment app) throws ValidationException;
 	public abstract int countOfAppointmentsByDateAndDoctorId(int doctorId, String date);
+	public abstract List<Appointment> findWaitingListAppointmentsByDoctorIdAndDate(int doctorId , String date);
+	public abstract void changeWaitingListToBooked(int appointmentId);
 }

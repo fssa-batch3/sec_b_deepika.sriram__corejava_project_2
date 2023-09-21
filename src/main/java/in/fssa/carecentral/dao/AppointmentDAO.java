@@ -226,7 +226,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE appointments SET status = ? , reason_for_rejection_of_appointment = ? WHERE id = ? AND NOT (status = 'Cancelled_by_doctor' OR status = 'Consulted') ";
+			String query = "UPDATE appointments SET status = ? , reason_for_rejection_of_appointment = ? WHERE id = ? AND NOT (status = 'Cancelled_by_doctor' OR status = 'Consulted' OR status = 'Cancelled_by_patient') ";
 			ps = con.prepareStatement(query);
 			ps.setString(1, appointment.getStatus().name());
 			ps.setString(2, appointment.getReasonForRejection());
@@ -329,6 +329,76 @@ public class AppointmentDAO implements AppointmentInterface{
 			ConnectionUtil.close(con, ps, rs);
 		}
 		return count;
+	}
+
+	
+
+	@Override
+	public List<Appointment> findWaitingListAppointmentsByDoctorIdAndDate(int doctorId, String date) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Appointment> appointmentList = new ArrayList<Appointment>();
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "SELECT id , patient_id , doctor_id , reason_for_consultation , method_of_consultation , date_of_consultation , start_time , end_time , status FROM appointments WHERE status = 'Waiting_list' AND doctor_id = ? AND date_of_consultation = ? ORDER BY created_at ASC";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, doctorId);
+			LocalDate localDate = AppointmentService.convertStringToDate(date);
+			java.sql.Date sqlDate = Date.valueOf(localDate);
+			ps.setDate(2, sqlDate);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Appointment appointment = new Appointment();
+				appointment.setId(rs.getInt("id"));
+				appointment.setPatientId(rs.getInt("patient_id"));
+				appointment.setDoctorId(rs.getInt("doctor_id"));
+				appointment.setReasonForConsultation(rs.getString("reason_for_consultation"));
+				appointment.setMethodOfConsultation(MethodOfConsultation.valueOf(rs.getString("method_of_consultation")));
+				appointment.setDateOfConsultation(rs.getString("date_of_consultation"));
+				appointment.setStartTime(rs.getString("start_time"));
+				appointment.setEndTime(rs.getString("end_time"));
+				appointment.setStatus(Status.valueOf(rs.getString("status")));
+				
+				appointmentList.add(appointment);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println(e);
+			throw new RuntimeException(e);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		finally {
+			ConnectionUtil.close(con, ps, rs);
+		}
+		return appointmentList;
+	}
+
+	@Override
+	public void changeWaitingListToBooked(int appointmentId) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "UPDATE appointments SET status = 'Booked' WHERE id = ? AND status = 'Waiting_list'";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, appointmentId);
+			int rowsAffected = ps.executeUpdate();
+			if(rowsAffected>0) {
+				System.out.println("Appointment Status updated successfully");
+			}else {
+				throw new RuntimeException();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println(e);
+			throw new RuntimeException(e);
+		}finally {
+			ConnectionUtil.close(con, ps);
+		}
 	}
 
 
