@@ -20,13 +20,8 @@ public class UserValidator {
 		if(user == null) {
 			throw new ValidationException("User cannot be null");
 		}
-//		if(user.getId()<0) {
-//			throw new ValidationException("id cannot be negative"); 
-//		}
-//		if(user.getAge()<0) {
-//			throw new ValidationException("age cannot be negative");
-//		}
-		NumberUtil.rejectIfInvalidInteger(user.getId(), "id");
+		
+//		NumberUtil.rejectIfInvalidInteger(user.getId(), "id");
 		NumberUtil.rejectIfInvalidInteger(user.getAge(), "age");
 		if(user.getAge()<18) {
 			throw new ValidationException("age must be atleast greater than or equal to 18");
