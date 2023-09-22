@@ -89,7 +89,7 @@ public class UserValidator {
 			throw new ValidationException("User doesn't exists");
 		}
 		
-		StringUtil.rejectIfInvalidString(user.getPassword(), "password");
+//		StringUtil.rejectIfInvalidString(user.getPassword(), "password");
 		StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
 		StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
 		
@@ -105,13 +105,13 @@ public class UserValidator {
 		}
 		
 		
-		String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^*&+=])(?=\\S+$).{8,}$";
-        Pattern compiledPattern = Pattern.compile(pattern);
-        Matcher matcher = compiledPattern.matcher(user.getPassword());
-
-        if (!matcher.matches()) {
-            throw new ValidationException("Password should contain the combination of uppercase , lowercase , numbers and symbols");
-        }
+//		String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^*&+=])(?=\\S+$).{8,}$";
+//        Pattern compiledPattern = Pattern.compile(pattern);
+//        Matcher matcher = compiledPattern.matcher(user.getPassword());
+//
+//        if (!matcher.matches()) {
+//            throw new ValidationException("Password should contain the combination of uppercase , lowercase , numbers and symbols");
+//        }
 	}
 	
 	

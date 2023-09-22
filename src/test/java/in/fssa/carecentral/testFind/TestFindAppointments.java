@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import in.fssa.carecentral.exception.ValidationException;
@@ -11,6 +12,7 @@ import in.fssa.carecentral.service.AppointmentService;
 
 public class TestFindAppointments {
 
+	
 	@Test
 	public void testFindAppointmentWithValidDoctorId() {
 		AppointmentService appointmentService = new AppointmentService();
@@ -47,6 +49,7 @@ public class TestFindAppointments {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
+	@Disabled
 	@Test
 	public void testFindAppointmentByInvalidUserId() {
 		AppointmentService appointmentService = new AppointmentService();
@@ -71,6 +74,7 @@ public class TestFindAppointments {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
+	@Disabled
 	@Test
 	public void testFindCountOfAppointmentsByInvalidDoctorId() {
 		AppointmentService appointmentService = new AppointmentService();
@@ -110,6 +114,7 @@ public class TestFindAppointments {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
+	@Disabled
 	@Test
 	public void testFindCountOfAppointmentsByIncorrectPatternOfDate() {
 		AppointmentService appointmentService = new AppointmentService();

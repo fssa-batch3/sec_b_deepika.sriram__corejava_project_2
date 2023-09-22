@@ -254,62 +254,11 @@ public class TestUpdateUser {
 		assertTrue(m1.equals(m2));
 	}
 	
-	@Test
-	public void testUpdateUserWithPasswordNull() {
-		UserService us = new UserService();
-		User user = new User();
-		user.setFirstName("Deepika");
-		user.setLastName("Sriram");
-		user.setAge(18);
-		user.setGender(Gender.F);
-		user.setMobileNumber(7397314532l);
-		user.setPassword(null);
-		
-		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.updateUser(3, user);
-		});
-		String m1 = "password cannot be null or empty";
-		String m2 = excp.getMessage();
-		assertTrue(m1.equals(m2));
-	}
 	
-	@Test
-	public void testUpdateUserWithPasswordEmpty() {
-		UserService us = new UserService();
-		User user = new User();
-		user.setFirstName("Deepika");
-		user.setLastName("Sriram");
-		user.setAge(18);
-		user.setGender(Gender.F);
-		user.setMobileNumber(7397314532l);
-		user.setPassword("");
-		
-		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.updateUser(3, user);
-		});
-		String m1 = "password cannot be null or empty";
-		String m2 = excp.getMessage();
-		assertTrue(m1.equals(m2));
-	}
 	
-	@Test
-	public void testUpdateUserWithIncorrectPassword() {
-		UserService us = new UserService();
-		User user = new User();
-		user.setFirstName("Deepika");
-		user.setLastName("Sriram");
-		user.setAge(18);
-		user.setGender(Gender.F);
-		user.setMobileNumber(7397314532l);
-		user.setPassword("deepika123");
-		
-		Exception excp = assertThrows(ValidationException.class , () ->{
-			us.updateUser(3, user);
-		});
-		String m1 = "Password should contain the combination of uppercase , lowercase , numbers and symbols";
-		String m2 = excp.getMessage();
-		assertTrue(m1.equals(m2));
-	}
+	
+	
+	
 	
 	
 }

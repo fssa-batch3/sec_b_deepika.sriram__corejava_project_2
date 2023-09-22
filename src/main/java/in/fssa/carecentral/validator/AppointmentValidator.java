@@ -1,5 +1,6 @@
 package in.fssa.carecentral.validator;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -92,6 +93,14 @@ public class AppointmentValidator {
 		DateUtil.rejectIfInvalidDate(appointment.getDateOfConsultation(), "date");
 	    
 	    LocalDate date = LocalDate.parse(appointment.getDateOfConsultation());
+	    
+	    DayOfWeek dateOfWeek = date.getDayOfWeek();
+	    String week = dateOfWeek.toString();
+	    if(week.equals("SATURDAY") || week.equals("SUNDAY")) {
+	    	throw new ValidationException("you cannot book the appointment for saturday and sunday");
+	    }
+	    
+	    
 	    LocalDate currentDate = LocalDate.now();
 	    if(date.isBefore(currentDate)) {
 	    	throw new ValidationException("consultation date is before the today's date");
@@ -109,6 +118,8 @@ public class AppointmentValidator {
 	    if(startingTime.isBefore(LocalTime.of(9, 00, 00))|| startingTime.isAfter(LocalTime.of(20, 00, 00))) {
 	    	throw new ValidationException("you cannot book the appointment for before 9 am or after 8 pm");
 	    }
+	    
+	    
 	    
 	    // validation for appointment already exists in this time 
 	     boolean exists = validateAppointmentAlreadyExists(startingTime , appointment.getDateOfConsultation());
@@ -182,7 +193,7 @@ public class AppointmentValidator {
 			throw new ValidationException("no appointment exist to update");
 		}
 		
-		String status = app.getStatus().name(); 
+		String status = app.getStatus().name();  
 		if(status.equals(appointment.getStatus().name())){
 			throw new ValidationException("status is already in ".concat(status));
 		}

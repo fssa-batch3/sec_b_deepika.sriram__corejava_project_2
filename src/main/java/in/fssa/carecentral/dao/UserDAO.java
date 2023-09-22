@@ -123,15 +123,14 @@ public class UserDAO implements UserInterface {
 		int userId=0;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE users SET first_name = ? , last_name = ? , age = ? , gender = ? , mobile_number = ? , password = ? WHERE is_active = 1 AND user_id = ?";
+			String query = "UPDATE users SET first_name = ? , last_name = ? , age = ? , gender = ? , mobile_number = ?  WHERE is_active = 1 AND user_id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, newUser.getFirstName());
 			ps.setString(2, newUser.getLastName());
 			ps.setInt(3, newUser.getAge());
 			ps.setString(4, newUser.getGender().name());
 			ps.setLong(5, newUser.getMobileNumber());
-			ps.setString(6, PasswordEncryptor.encrypt(newUser.getPassword(), System.getenv("SECRET_KEY")));
-			ps.setInt(7, id);
+			ps.setInt(6, id);
 			int rowsaffected = ps.executeUpdate();
 			if (rowsaffected>0) {
 				

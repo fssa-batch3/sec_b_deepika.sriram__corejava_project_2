@@ -77,7 +77,7 @@ public class AppointmentService {
 	public  void updateAppointmentStatusByAppointmentId(int id , Appointment appointment) throws ValidationException {
 		try {
 			AppointmentValidator.validateForUpdate(id, appointment);
-		} catch (ValidationException e) {
+		} catch (ValidationException e) { 
 			throw new ValidationException(e.getMessage());
 		}
 		AppointmentDAO appointmentDAO =  new AppointmentDAO();
