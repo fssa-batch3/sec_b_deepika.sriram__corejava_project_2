@@ -8,6 +8,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class PasswordEncryptor {
+	
+	
 	public static String encrypt(String plainText, String secretKey) throws Exception {
 	    // Generate a secret key from the provided string
 	    SecretKey key = new SecretKeySpec(secretKey.getBytes(), "AES");
@@ -45,11 +47,4 @@ public class PasswordEncryptor {
 	    return new String(decryptedBytes);
 	}
 	
-	public static void main(String[] args) {
-		try {
-			System.out.print(decrypt("bpzMsTRmij6vB3BLihOPxQ==","ccntrl123@google"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

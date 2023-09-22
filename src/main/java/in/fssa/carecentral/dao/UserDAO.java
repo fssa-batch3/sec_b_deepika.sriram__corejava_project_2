@@ -81,7 +81,7 @@ public class UserDAO implements UserInterface {
 			ps.setString(4, newUser.getGender().name());
 			ps.setLong(5, newUser.getMobileNumber());
 			ps.setString(6, newUser.getEmailId());
-			ps.setString(7, PasswordEncryptor.encrypt(newUser.getPassword(), "ccntrl123@google"));
+			ps.setString(7, PasswordEncryptor.encrypt(newUser.getPassword(), System.getenv("SECRET_KEY")));
 
 			int rowsAffected = ps.executeUpdate();
 
@@ -130,7 +130,7 @@ public class UserDAO implements UserInterface {
 			ps.setInt(3, newUser.getAge());
 			ps.setString(4, newUser.getGender().name());
 			ps.setLong(5, newUser.getMobileNumber());
-			ps.setString(6, PasswordEncryptor.encrypt(newUser.getPassword(), "ccntrl123@google"));
+			ps.setString(6, PasswordEncryptor.encrypt(newUser.getPassword(), System.getenv("SECRET_KEY")));
 			ps.setInt(7, id);
 			int rowsaffected = ps.executeUpdate();
 			if (rowsaffected>0) {
@@ -277,7 +277,7 @@ public class UserDAO implements UserInterface {
 				user.setGender(Gender.valueOf(rs.getString("gender")));
 				user.setMobileNumber(rs.getLong("mobile_number"));
 				user.setEmailId(rs.getString("email_id"));
-				user.setPassword(PasswordEncryptor.decrypt(rs.getString("password"), "ccntrl123@google"));
+				user.setPassword(PasswordEncryptor.decrypt(rs.getString("password"), System.getenv("SECRET_KEY")));
 				user.setActive(rs.getBoolean("is_active"));
 			}
 
