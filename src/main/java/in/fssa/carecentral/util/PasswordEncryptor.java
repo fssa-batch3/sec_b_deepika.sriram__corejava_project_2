@@ -47,12 +47,5 @@ public class PasswordEncryptor {
 	    return new String(decryptedBytes);
 	}
 	
-	public static void main(String[] args) {
-		try {
-			System.out.println(decrypt("v1eOTyunmMkjZiERH1tGGg==",System.getenv("SECRET_KEY")));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 }

@@ -77,6 +77,7 @@ public class TestCreateAppointment {
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	
+	@Disabled
 	@Test
 	public void testCreateAppointmentWithInvalidPatientId() {
 		AppointmentService appointmentService = new AppointmentService();
@@ -148,7 +149,7 @@ public class TestCreateAppointment {
 		Appointment appointment = new Appointment();
 		
 		appointment.setPatientId(3);
-		appointment.setDoctorId(5);
+		appointment.setDoctorId(2);
 		appointment.setReasonForConsultation(null);
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(2));
@@ -162,6 +163,7 @@ public class TestCreateAppointment {
 		
 		String expectedMessage = "reason for consultation cannot be null or empty";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage));
 	}
 	

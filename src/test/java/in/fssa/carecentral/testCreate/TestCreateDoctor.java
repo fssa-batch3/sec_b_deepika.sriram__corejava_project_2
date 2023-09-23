@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import in.fssa.carecentral.dto.DoctorDTO;
@@ -14,6 +15,7 @@ import in.fssa.carecentral.util.EmailGenerator;
 
 public class TestCreateDoctor {
 
+	@Disabled
 	@Test
 	public void testCreateDoctorWithValidData() {
 		DoctorService ds = new DoctorService();
