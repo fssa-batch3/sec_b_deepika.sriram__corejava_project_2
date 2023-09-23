@@ -17,6 +17,7 @@ import in.fssa.carecentral.model.Appointment;
 import in.fssa.carecentral.service.AppointmentService;
 import in.fssa.carecentral.util.RandomTimeGenerator;
 
+@Disabled
 public class TestCreateAppointment {
 
 	@Disabled

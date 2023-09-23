@@ -33,7 +33,7 @@ public class TestFindAppointments {
 	public void testFindAppointmentByValidAppointmentId() {
 		AppointmentService appointmentService = new AppointmentService();
 		assertDoesNotThrow(()->{
-			appointmentService.getAppointmentByAppointmentId(4);
+			appointmentService.getAppointmentByAppointmentId(1);
 		});
 	}
 	
