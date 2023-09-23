@@ -41,7 +41,7 @@ public class TestFindAppointments {
 	public void testFindAppointmentByInvalidDoctorId() {
 		AppointmentService appointmentService = new AppointmentService();
 		Exception exception = assertThrows(ValidationException.class,()->{
-			appointmentService.getAllAppointmentsByDoctorId(16);
+			appointmentService.getAllAppointmentsByDoctorId(0);
 		});
 		String expectedMessage = "Doctor doesn't exists";
 		String actualMessage = exception.getMessage();

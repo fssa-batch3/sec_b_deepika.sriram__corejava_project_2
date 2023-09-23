@@ -32,7 +32,7 @@ public class TestCreateAppointment {
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(random.nextLong(7)));
 		appointment.setDateOfConsultation(date);
 		LocalTime st = LocalTime.of(12, 00, 0);
-		LocalTime et = st.plusHours(1);
+		LocalTime et = st.plusMinutes(15);
 		String startTime = AppointmentService.convertLocalTimeToString(st);
 		String endTime = AppointmentService.convertLocalTimeToString(et);
 		appointment.setStartTime(startTime);
@@ -81,7 +81,7 @@ public class TestCreateAppointment {
 	public void testCreateAppointmentWithInvalidPatientId() {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
-		appointment.setPatientId(30);
+		appointment.setPatientId(0);
 		appointment.setDoctorId(5);
 		appointment.setReasonForConsultation("Stomach ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
@@ -125,7 +125,7 @@ public class TestCreateAppointment {
 		AppointmentService appointmentService = new AppointmentService();
 		Appointment appointment = new Appointment();
 		appointment.setPatientId(3);
-		appointment.setDoctorId(15);
+		appointment.setDoctorId(0);
 		appointment.setReasonForConsultation("Stomach ache for 3 days");
 		appointment.setMethodOfConsultation(MethodOfConsultation.In_person);
 		String date = AppointmentService.convertLocalDateToString(LocalDate.now().plusDays(2));
@@ -138,6 +138,7 @@ public class TestCreateAppointment {
 		});
 		String expectedMessage = "no doctor exists in the given doctor id";
 		String actualMessage = exception.getMessage();
+		System.out.println(actualMessage);
 		assertTrue(expectedMessage.equals(actualMessage)); 
 	}
 	
