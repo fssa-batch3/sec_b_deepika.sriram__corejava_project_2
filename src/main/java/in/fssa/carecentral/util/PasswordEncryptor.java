@@ -24,7 +24,7 @@ public class PasswordEncryptor {
 	    byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
 
 	    // Encode the encrypted bytes as a Base64 string
-	    return Base64.getEncoder().encodeToString(encryptedBytes);
+	    return Base64.getEncoder().encodeToString(encryptedBytes); 
 	}
 
 	public static String decrypt(String encryptedText, String secretKey) throws Exception {
@@ -47,5 +47,12 @@ public class PasswordEncryptor {
 	    return new String(decryptedBytes);
 	}
 	
-	
+	public static void main(String[] args) {
+		try {
+			System.out.println(decrypt("5B2ks9mG9Zybeu3xFQGNlA==" , System.getenv("SECRET_KEY")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -256,7 +256,6 @@ public class AppointmentDAO implements AppointmentInterface{
 		ResultSet rs = null;
 		
 		AppointmentDTO appointment = null;
-		User user = null;
 		try {
 			con = ConnectionUtil.getConnection();
 			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE id = ?";
@@ -265,15 +264,14 @@ public class AppointmentDAO implements AppointmentInterface{
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				appointment = new AppointmentDTO();
-				user = UserService.getUserById(rs.getInt("patient_id"));
 				appointment.setId(appId);
-				appointment.setUserId(user.getId());
+				appointment.setUserId(rs.getInt("user_id"));
 				appointment.setDoctorId(rs.getInt("doctor_id"));
 				String doctorName = DoctorService.getDoctorById(appointment.getDoctorId()).fullName();
-				appointment.setPatientName(user.fullName());
-				appointment.setAge(user.getAge());
-				appointment.setGender(user.getGender());
-				appointment.setMobileNumber(user.getMobileNumber());
+				appointment.setPatientName(rs.getString("first_name").concat(" ").concat(rs.getString("last_name")));
+				appointment.setAge(rs.getInt("age"));
+				appointment.setGender(Gender.valueOf(rs.getString("gender")));
+				appointment.setMobileNumber(rs.getLong("mobile_number"));
 				appointment.setDoctorName(doctorName);
 				appointment.setReasonForConsultation(rs.getString("reason_for_consultation"));
 				appointment.setMethodOfConsultation(MethodOfConsultation.valueOf(rs.getString("method_of_consultation")));
