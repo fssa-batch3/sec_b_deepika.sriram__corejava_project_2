@@ -46,13 +46,5 @@ public class PasswordEncryptor {
 	    // Convert the decrypted bytes to a string
 	    return new String(decryptedBytes);
 	}
-	
-	public static void main(String[] args) {
-		try {
-			System.out.println(decrypt("5B2ks9mG9Zybeu3xFQGNlA==" , System.getenv("SECRET_KEY")));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 }
