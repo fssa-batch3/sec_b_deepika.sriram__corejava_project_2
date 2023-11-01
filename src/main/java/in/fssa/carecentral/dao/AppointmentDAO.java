@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import in.fssa.carecentral.dto.AppointmentDTO;
 import in.fssa.carecentral.enumfiles.Gender;
@@ -138,7 +139,7 @@ public class AppointmentDAO implements AppointmentInterface{
 			String doctorName = DoctorService.getDoctorById(doctorId).fullName(); 
 			ps.setInt(1, doctorId);
 			
-			appointmentList = new HashSet<AppointmentDTO>();
+			appointmentList = new TreeSet<AppointmentDTO>();
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				appointment  = new AppointmentDTO();
@@ -179,7 +180,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<AppointmentDTO> listOfAppointments = new HashSet<AppointmentDTO>();
+		Set<AppointmentDTO> listOfAppointments = new TreeSet<AppointmentDTO>();
 		AppointmentDTO appointment = null;
 		try {
 			con = ConnectionUtil.getConnection();

@@ -52,7 +52,6 @@ public class AppointmentService {
 
 	public static  List<Map<String,LocalTime>> getAllBookedTimingsByDate(String date){
 		AppointmentDAO appointmentDAO = new AppointmentDAO();
-		System.out.println(appointmentDAO.findAllBookedTimingsByDate(date));
 		return appointmentDAO.findAllBookedTimingsByDate(date);
 	}
 	
