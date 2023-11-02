@@ -134,12 +134,12 @@ public class AppointmentDAO implements AppointmentInterface{
 		
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE  NOT (status = 'Cancelled_by_patient' OR status = 'Waiting_list') AND doctor_id = ? ORDER BY date_of_consultation";
+			String query = "SELECT user_id , first_name , last_name , age , gender , mobile_number , a.* FROM appointments AS a INNER JOIN users AS u ON u.user_id = a.patient_id WHERE  NOT (status = 'Cancelled_by_patient' OR status = 'Waiting_list' OR status = 'Cancelled_by_doctor') AND doctor_id = ? ORDER BY date_of_consultation";
 			ps = con.prepareStatement(query); 
 			String doctorName = DoctorService.getDoctorById(doctorId).fullName(); 
 			ps.setInt(1, doctorId);
 			
-			appointmentList = new TreeSet<AppointmentDTO>();
+			appointmentList = new HashSet<AppointmentDTO>();
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				appointment  = new AppointmentDTO();
@@ -180,7 +180,7 @@ public class AppointmentDAO implements AppointmentInterface{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<AppointmentDTO> listOfAppointments = new TreeSet<AppointmentDTO>();
+		Set<AppointmentDTO> listOfAppointments = new HashSet<AppointmentDTO>();
 		AppointmentDTO appointment = null;
 		try {
 			con = ConnectionUtil.getConnection();
